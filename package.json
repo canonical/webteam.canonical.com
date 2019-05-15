@@ -1,15 +1,8 @@
 {
   "scripts": {
     "clean": "rm -rf node_modules yarn-error.log css static/css *.log *.sqlite _site/ build/ .jekyll-metadata .bundle",
-    "watch": "watch -p 'static/sass/**/*.scss' -c 'yarn run build'",
-    "build": "node-sass --include-path node_modules static/sass --output-style compressed --output static/css && postcss --use autoprefixer --replace 'static/css/**/*.css' && postcss 'static/css/**/*.css'",
-    "test": "sass-lint static/**/*.scss --verbose --no-exit"
-  },
-  "dependencies": {
-    "autoprefixer": "9.5.1",
-    "node-sass": "4.11.0",
-    "postcss-cli": "6.1.2",
-    "sass-lint": "1.13.1",
-    "watch-cli": "0.2.3"
+    "serve": "./entrypoint 0.0.0.0:$PORT",
+    "build": "echo 'nothing to build'",
+    "test": "flake8 webapp && black --line-length 79 webapp"
   }
 }

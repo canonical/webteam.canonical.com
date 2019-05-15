@@ -7,7 +7,7 @@ import re
 import flask
 import requests
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__, template_folder="../templates")
 
 
 @app.route("/")
