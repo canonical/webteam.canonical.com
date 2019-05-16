@@ -307,13 +307,10 @@
                     let release = domainRow.querySelector('.release');
 
                     if ('error' in domainJson) {
-                        imageTag.setAttribute('colspan', '4');
+                        imageTag.setAttribute('colspan', '3');
                         imageTag.innerHTML = `<small style="color: red; font-style: italic">${domainJson.error}</small>`;
                         commit.remove();
                         humanTime.remove();
-                        if (release) {
-                            release.remove();
-                        }
                     } else {
                         imageTag.innerHTML = `<code>${domainJson['imageTag']}</code>`;
                         commit.innerHTML = `<a href="https://github.com/${domainRepositories[domainJson['domain']]}/commit/${domainJson['commitId']}">${domainJson['commitId']}</a>`;
