@@ -126,7 +126,7 @@
                     </tr>
                     <tr>
                         <td><a href="http://landscape-brochure.internal" target="_blank">landscape-brochure.internal</a></td>
-                        <td colspan="4">Can't access internal domains</td>
+                        <td class="image-tag" colspan="4">Not enabled - see <a href="https://wiki.canonical.com/ProductStrategyTeam/WebDevelopment/Websites">the wiki</a></td>
                     </tr>
                     <tr data-domain="cloud-init.io">
                         <td><a href="https://staging.cloud-init.io" target="_blank">staging.cloud-init.io</a></td>
@@ -158,7 +158,7 @@
                     </tr>
                     <tr>
                         <td><a href="https://usn.staging.ubuntu.com" target="_blank">usn.staging.ubuntu.com</a></td>
-                        <td colspan="4">USN works differently</td>
+                        <td class="image-tag" colspan="4">Not enabled - see <a href="https://wiki.canonical.com/ProductStrategyTeam/WebDevelopment/Websites">the wiki</a></td>
                     </tr>
                     <tr data-domain="sdrsatcom.snapcraft.io">
                         <td><a href="https://sdrsatcom.staging.snapcraft.io" target="_blank">sdrsatcom.staging.snapcraft.io</a></td>
@@ -167,12 +167,9 @@
                         <td class="human-time">...</td>
                         <td class="release">...</td>
                     </tr>
-                    <tr data-domain="tutorials.ubuntu.com">
+                    <tr>
                         <td><a href="https://tutorials.staging.ubuntu.com" target="_blank">tutorials.staging.ubuntu.com</a></td>
-                        <td class="image-tag">...</td>
-                        <td class="commit">...</td>
-                        <td class="human-time">...</td>
-                        <td class="release">...</td>
+                        <td class="image-tag" colspan="4">Not enabled - see <a href="https://wiki.canonical.com/ProductStrategyTeam/WebDevelopment/Websites">the wiki</a></td>
                     </tr>
                     <tr data-domain="maas.io">
                         <td><a href="https://staging.maas.io" target="_blank">staging.maas.io</a></td>
@@ -221,6 +218,35 @@
         </div>
 
         <script>
+            const domainRepositories = {
+                '360.canonical.com': 'canonical-web-and-design/360.canonical.com',
+                'blog.ubuntu.com': 'canonical-web-and-design/blog.ubuntu.com',
+                'cn.ubuntu.com': 'canonical-web-and-design/cn.ubuntu.com',
+                'design.ubuntu.com': 'canonical-web-and-design/design.ubuntu.com',
+                'developer.ubuntu.com': 'canonical-web-and-design/developer.ubuntu.com',
+                'docs.conjure-up.io': 'canonical-web-and-design/docs.conjure-up.io',
+                'docs.jujucharms.com': 'canonical-web-and-design/docs.jujucharms.com',
+                'docs.maas.io': 'CanonicalLtd/maas-docs',
+                'docs.snapcraft.io': 'canonical-web-and-design/docs.snapcraft.io',
+                'docs.ubuntu.com': 'canonical-web-and-design/docs.ubuntu.com',
+                'docs.vanillaframework.io': 'canonical-web-and-design/vanilla-framework',
+                'engage.canonical.com': 'canonical-web-and-design/engage.canonical.com-public-cloud',
+                'jp.ubuntu.com': 'canonical-web-and-design/jp.ubuntu.com',
+                'limenet.snapcraft.io': 'canonical-web-and-design/snapcraft.io',
+                'cloud-init.io': 'canonical-web-and-design/cloud-init.io',
+                'conjure-up.io': 'canonical-web-and-design/conjure-up.io',
+                'jaas.ai': 'canonical-web-and-design/jaas.ai',
+                'old-docs.jujucharms.com': 'juju/docs',
+                'sdrsatcom.snapcraft.io': 'canonical-web-and-design/snapcraft.io',
+                'tutorials.ubuntu.com': 'canonical-web-and-design/tutorials.ubuntu.com',
+                'maas.io': 'canonical-web-and-design/maas.io',
+                'microk8s.io': 'canonical-web-and-design/microk8s.io',
+                'mir-server.io': 'canonical-web-and-design/mir-server.io',
+                'netplan.io': 'canonical-web-and-design/netplan.io',
+                'snapcraft.io': 'canonical-web-and-design/snapcraft.io',
+                'vanillaframework.io': 'canonical-web-and-design/vanillaframework.io'
+            };
+
             function writeDomainDetails(domainRow) {
                 return function (domainJson) {
                     let imageTag = domainRow.querySelector('.image-tag');
@@ -236,11 +262,7 @@
                         release.remove();
                     } else {
                         imageTag.innerHTML = `<code>${domainJson['imageTag']}</code>`;
-                        if (domainJson['domain'] == '360.canonical.com') {
-                            commit.innerHTML = `<a href="https://github.com/ubuntudesign/360.canonical.com/commit/${domainJson['commitId']}">${domainJson['commitId']}</a>`;
-                        } else {
-                            commit.innerHTML = `<a href="https://github.com/canonical-websites/${domainJson['domain']}/commit/${domainJson['commitId']}">${domainJson['commitId']}</a>`;
-                        }
+                        commit.innerHTML = `<a href="https://github.com/${domainRepositories[domainJson['domain']]}/commit/${domainJson['commitId']}">${domainJson['commitId']}</a>`;
                         humanTime.textContent = domainJson['humanTime'];
                         release.innerHTML = `<a ` +
                                             `  style="width: 100%" ` +
