@@ -5,6 +5,7 @@
 <head>
     <title>Deployment portal</title>
     <link rel="stylesheet" href="https://assets.ubuntu.com/v1/vanilla-framework-version-1.8.1.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 
 <body>
@@ -17,13 +18,13 @@
         </div>
 
         <div class="p-strip is-shallow is-bordered">
-            <div class="row">
+            <div class="row" style="overflow: auto">
                 <table>
                     <thead>
                         <tr>
                             <th width="250">Staging domain</th>
                             <th width="170">Image tag</th>
-                            <th>Commit</th>
+                            <th width="80">Commit</th>
                             <th width="230">Deployed to staging</th>
                             <th width="100"></th>
                         </tr>
