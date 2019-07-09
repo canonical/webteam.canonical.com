@@ -290,34 +290,38 @@
       let release = domainRow.querySelector('.release');
 
       if ('error' in domainJson) {
-        imageTag.setAttribute('colspan', '3');
-        imageTag.innerHTML = `<small style="color: red; font-style: italic">${domainJson.error}</small>`;
-        commit.remove();
-        humanTime.remove();
+          imageTag.setAttribute('colspan', '3');
+          imageTag.innerHTML = `<small style="color: red; font-style: italic">${domainJson.error}</small>`;
+          commit.remove();
+          humanTime.remove();
       } else {
-        imageTag.innerHTML = `<code>${domainJson['imageTag']}</code>`;
-        commit.innerHTML = `<a href="https://github.com/${domainRepositories[domainJson['domain']]}/commit/${domainJson['commitId']}">${domainJson['commitId']}</a>`;
-        humanTime.textContent = domainJson['humanTime'];
-        humanTime.dataset.sort = domainJson['epochTime'];
-        if (release) {
-          release.innerHTML = `<a style="width: 100%" class="p-button--neutral" href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2F${domainJson['domain']}-production%2Fparambuild%2F%3Fimage_tag%3D${domainJson['imageTag']}">` +
-            `  Release` +
-            `</a>`;
+          let stagingCommitID = domainJson['staging']['commitId'];
+          let productionCommitID = domainJson['production']['commitId'];
+          imageTag.innerHTML = `<code>${domainJson['staging']['imageTag']}</code>`;
+          commit.innerHTML = `<a href="https://github.com/${domainRepositories[domainJson['staging']['domain']]}/commit/${stagingCommitID}">${stagingCommitID}</a>`;
+          humanTime.textContent = domainJson['staging']['humanTime'];
+        humanTime.dataset.sort = domainJson['staging']['epochTime'];
+          if (release) {
+            if (stagingCommitID !== productionCommitID) {
+              release.innerHTML = `<a style="width: 100%" class="p-button--neutral" href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Fdeploy-to-${domainJson['staging']['domain']}%2Fparambuild%2F%3Fimage_tag%3D${domainJson['staging']['imageTag']}">` +
+                                  `  Release` +
+                                  `</a>`;
+            } else {
+              release.innerHTML = "Up to date";
+            }
           }
-        }
       }
     }
+  }
 
-    document.querySelectorAll('[data-domain]').forEach(
-    function (domainRow) {
-      let domain = domainRow.dataset.domain;
-      fetch(`/domain-info.json?domain=${domain}`)
-      .then(async function (response) {
-        return response.json();
-      })
-      .then(writeDomainDetails(domainRow))
-    }
-    )
+  document.querySelectorAll('[data-domain]').forEach(function (domainRow) {
+    let domain = domainRow.dataset.domain;
+    fetch(`/domain-info.json?domain=${domain}`)
+    .then(async function (response) {
+      return response.json();
+    })
+    .then(writeDomainDetails(domainRow))
+  });
   </script>
 
   <script>
