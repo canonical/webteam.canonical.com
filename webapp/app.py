@@ -84,7 +84,8 @@ def domain_info():
         "epochTime": int(staging_match.group(1)),
         "commitId": staging_match.group(2),
         "humanTime": datetime.datetime.fromtimestamp(
-            int(staging_match.group(1))).strftime("%c %Z")
+            int(staging_match.group(1))
+        ).strftime("%c %Z"),
     }
 
     production = {
@@ -93,16 +94,12 @@ def domain_info():
         "epochTime": int(production_match.group(1)),
         "commitId": production_match.group(2),
         "humanTime": datetime.datetime.fromtimestamp(
-            int(production_match.group(1))).strftime("%c %Z")
+            int(production_match.group(1))
+        ).strftime("%c %Z"),
     }
 
     return (
-        json.dumps(
-            {
-                "staging": staging,
-                "production": production,
-            }
-        ),
+        json.dumps({"staging": staging, "production": production}),
         200,
         {"Content-Type": "application/json"},
     )
