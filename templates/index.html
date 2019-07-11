@@ -124,7 +124,7 @@
                             <td class="human-time">...</td>
                             <td>
                                 <a class="p-button--neutral"
-                                    href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Fdeploy-to-docs.staging.vanillaframework.io"
+                                    href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Fdocs.vanillaframework.io-staging%2Fbuild"
                                 >
                                     <small>Deploy to staging</small>
                                 </a>
@@ -161,7 +161,7 @@
                             <td class="human-time">...</td>
                             <td>
                                 <a class="p-button--neutral"
-                                href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Fdeploy-to-limenet.staging.snapcraft.io"
+                                href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Flimenet.snapcraft.io-staging%2Fbuild"
                                 >
                                     <small>Deploy to staging</small>
                                 </a>
@@ -219,7 +219,7 @@
                             <td class="human-time">...</td>
                             <td>
                                 <a class="p-button--neutral"
-                                href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Fdeploy-to-sdrsatcom.staging.snapcraft.io"
+                                href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Fsdrsatcom.snapcraft.io-staging%2Fbuild"
                                 >
                                     <small>Deploy to staging</small>
                                 </a>
@@ -299,7 +299,7 @@
                         commit.innerHTML = `<a href="https://github.com/${domainRepositories[domainJson['domain']]}/commit/${domainJson['commitId']}">${domainJson['commitId']}</a>`;
                         humanTime.textContent = domainJson['humanTime'];
                         if (release) {
-                            release.innerHTML = `<a style="width: 100%" class="p-button--neutral" href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Fdeploy-to-${domainJson['domain']}%2Fparambuild%2F%3Fimage_tag%3D${domainJson['imageTag']}">` +
+                            release.innerHTML = `<a style="width: 100%" class="p-button--neutral" href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2F${domainJson['domain']}-production%2Fparambuild%2F%3Fimage_tag%3D${domainJson['imageTag']}">` +
                                                 `  Release` +
                                                 `</a>`;
                         }
