@@ -3,6 +3,7 @@
     "clean": "rm -rf node_modules yarn-error.log css static/css *.log *.sqlite _site/ build/ .jekyll-metadata .bundle",
     "serve": "./entrypoint 0.0.0.0:$PORT",
     "build": "echo 'nothing to build'",
+    "format-python": "black --line-length 79 webapp",
     "lint-python": "flake8 webapp && black --check --line-length 79 webapp",
     "test": "yarn run lint-python"
   }

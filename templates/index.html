@@ -3,9 +3,10 @@
 <html>
 
 <head>
-  <title>Deployment portal</title>
+  <title>🚀 Deployment portal</title>
   <link rel="stylesheet" href="https://assets.ubuntu.com/v1/vanilla-framework-version-2.0.1.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" href="https://assets.ubuntu.com/v1/0843d517-favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
@@ -26,19 +27,12 @@
               <th width="170" role="columnheader" id="t-tag" aria-sort="none">Image tag</th>
               <th width="80" role="columnheader" id="t-commit" aria-sort="none">Commit</th>
               <th width="230" role="columnheader" id="t-deployed" aria-sort="none">Deployed to staging</th>
-              <th width="100" id="t-release" aria-sort="none"></th>
+              <th width="125" id="t-release" aria-sort="none"></th>
             </tr>
           </thead>
           <tbody>
             <tr data-domain="360.canonical.com">
               <td><a href="https://360.staging.canonical.com" target="_blank">360.staging.canonical.com</a></td>
-              <td class="image-tag">...</td>
-              <td class="commit">...</td>
-              <td class="human-time">...</td>
-              <td class="release">...</td>
-            </tr>
-            <tr data-domain="blog.ubuntu.com">
-              <td><a href="https://blog.staging.ubuntu.com" target="_blank">blog.staging.ubuntu.com</a></td>
               <td class="image-tag">...</td>
               <td class="commit">...</td>
               <td class="human-time">...</td>
@@ -123,10 +117,10 @@
               <td class="commit">...</td>
               <td class="human-time">...</td>
               <td>
-                <a class="p-button--neutral"
+                <a class="p-button--neutral" style="width: 100%"
                 href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Fdocs.vanillaframework.io-staging%2Fbuild"
                 >
-                  <small>Deploy to staging</small>
+                  Deploy to staging
                 </a>
               </td>
             </tr>
@@ -160,10 +154,10 @@
               <td class="commit">...</td>
               <td class="human-time">...</td>
               <td>
-                <a class="p-button--neutral"
+                <a class="p-button--neutral" style="width: 100%"
                 href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Flimenet.snapcraft.io-staging%2Fbuild"
                 >
-                  <small>Deploy to staging</small>
+                  Deploy to staging
                 </a>
               </td>
             </tr>
@@ -218,10 +212,10 @@
               <td class="commit">...</td>
               <td class="human-time">...</td>
               <td>
-                <a class="p-button--neutral"
+                <a class="p-button--neutral" style="width: 100%"
                 href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Fsdrsatcom.snapcraft.io-staging%2Fbuild"
                 >
-                <small>Deploy to staging</small>
+                Deploy to staging
               </a>
             </td>
           </tr>
@@ -254,7 +248,6 @@
 <script>
   const domainRepositories = {
     '360.canonical.com': 'canonical-web-and-design/360.canonical.com',
-    'blog.ubuntu.com': 'canonical-web-and-design/blog.ubuntu.com',
     'canonical.com': 'canonical-web-and-design/www.canonical.com',
     'cloud-init.io': 'canonical-web-and-design/cloud-init.io',
     'cn.ubuntu.com': 'canonical-web-and-design/cn.ubuntu.com',
@@ -290,34 +283,38 @@
       let release = domainRow.querySelector('.release');
 
       if ('error' in domainJson) {
-        imageTag.setAttribute('colspan', '3');
-        imageTag.innerHTML = `<small style="color: red; font-style: italic">${domainJson.error}</small>`;
-        commit.remove();
-        humanTime.remove();
+          imageTag.setAttribute('colspan', '3');
+          imageTag.innerHTML = `<small style="color: red; font-style: italic">${domainJson.error}</small>`;
+          commit.remove();
+          humanTime.remove();
       } else {
-        imageTag.innerHTML = `<code>${domainJson['imageTag']}</code>`;
-        commit.innerHTML = `<a href="https://github.com/${domainRepositories[domainJson['domain']]}/commit/${domainJson['commitId']}">${domainJson['commitId']}</a>`;
-        humanTime.textContent = domainJson['humanTime'];
-        humanTime.dataset.sort = domainJson['epochTime'];
-        if (release) {
-          release.innerHTML = `<a style="width: 100%" class="p-button--neutral" href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2F${domainJson['domain']}-production%2Fparambuild%2F%3Fimage_tag%3D${domainJson['imageTag']}">` +
-            `  Release` +
-            `</a>`;
+          let stagingCommitID = domainJson['staging']['commitId'];
+          let productionCommitID = domainJson['production']['commitId'];
+          imageTag.innerHTML = `<code>${domainJson['staging']['imageTag']}</code>`;
+          commit.innerHTML = `<a  href="https://github.com/${domainRepositories[domainJson['staging']['domain']]}/commit/${stagingCommitID}">${stagingCommitID}</a>`;
+          humanTime.textContent = domainJson['staging']['humanTime'];
+        humanTime.dataset.sort = domainJson['staging']['epochTime'];
+          if (release) {
+            if (stagingCommitID !== productionCommitID) {
+              release.innerHTML = `<a style="width: 100%" class="p-button--neutral" href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Fdeploy-to-${domainJson['staging']['domain']}%2Fparambuild%2F%3Fimage_tag%3D${domainJson['staging']['imageTag']}">` +
+                                  `  Release 🚀` +
+                                  `</a>`;
+            } else {
+              release.innerHTML = '<button style="width: 100%" class="p-button--neutral" disabled="true">Up to date 👍</button>';
+            }
           }
-        }
       }
     }
+  }
 
-    document.querySelectorAll('[data-domain]').forEach(
-    function (domainRow) {
-      let domain = domainRow.dataset.domain;
-      fetch(`/domain-info.json?domain=${domain}`)
-      .then(async function (response) {
-        return response.json();
-      })
-      .then(writeDomainDetails(domainRow))
-    }
-    )
+  document.querySelectorAll('[data-domain]').forEach(function (domainRow) {
+    let domain = domainRow.dataset.domain;
+    fetch(`/domain-info.json?domain=${domain}`)
+    .then(async function (response) {
+      return response.json();
+    })
+    .then(writeDomainDetails(domainRow))
+  });
   </script>
 
   <script>
@@ -365,30 +362,34 @@
           newRows.sort(function (a, b) {
             var c, d;
             // Trim the cell contents.
-            if (a.cells[col].dataset.sort && b.cells[col].dataset.sort) {
-              c = a.cells[col].dataset.sort;
-              d = b.cells[col].dataset.sort;
+            if (a.cells[col] && b.cells[col]) {
+              if (a.cells[col].dataset.sort && b.cells[col].dataset.sort) {
+                c = a.cells[col].dataset.sort;
+                d = b.cells[col].dataset.sort;
+              } else {
+                c = a.cells[col].textContent.trim();
+                d = b.cells[col].textContent.trim();
+              }
+              // If the content contains a number, parse it as a number.
+              // This is very crude and should not be considered production ready.
+              if (c.replace(/[^0-9]/gi, '') !== '' && !isNaN(c.replace(/[^0-9]/gi, ''))) {
+                c = parseInt(c.replace(/[^0-9]/gi, ''));
+                // Ascending for numbers and the alphabet are opposite.
+                direction *= -1;
+              }
+              if (d.replace(/[^0-9]/gi, '') !== '' && !isNaN(d.replace(/[^0-9]/gi, ''))) {
+                d = parseInt(d.replace(/[^0-9]/gi, ''));
+                // Ascending for numbers and the alphabet are opposite.
+                direction *= -1;
+              }
+              // Based on the direction, do the sort.
+              if (direction === 1) {
+                return c < d;
+              } else {
+                return c > d;
+              }
             } else {
-              c = a.cells[col].textContent.trim();
-              d = b.cells[col].textContent.trim();
-            }
-            // If the content contains a number, parse it as a number.
-            // This is very crude and should not be considered production ready.
-            if (c.replace(/[^0-9]/gi, '') !== '' && !isNaN(c.replace(/[^0-9]/gi, ''))) {
-              c = parseInt(c.replace(/[^0-9]/gi, ''));
-              // Ascending for numbers and the alphabet are opposite.
-              direction *= -1;
-            }
-            if (d.replace(/[^0-9]/gi, '') !== '' && !isNaN(d.replace(/[^0-9]/gi, ''))) {
-              d = parseInt(d.replace(/[^0-9]/gi, ''));
-              // Ascending for numbers and the alphabet are opposite.
-              direction *= -1;
-            }
-            // Based on the direction, do the sort.
-            if (direction === 1) {
               return c < d;
-            } else {
-              return c > d;
             }
           });
         }
