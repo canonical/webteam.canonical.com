@@ -27,7 +27,7 @@
               <th width="170" role="columnheader" id="t-tag" aria-sort="none">Image tag</th>
               <th width="80" role="columnheader" id="t-commit" aria-sort="none">Commit</th>
               <th width="230" role="columnheader" id="t-deployed" aria-sort="none">Deployed to staging</th>
-              <th width="100" id="t-release" aria-sort="none"></th>
+              <th width="125" id="t-release" aria-sort="none"></th>
             </tr>
           </thead>
           <tbody>
@@ -124,10 +124,10 @@
               <td class="commit">...</td>
               <td class="human-time">...</td>
               <td>
-                <a class="p-button--neutral"
+                <a class="p-button--neutral" style="width: 100%"
                 href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Fdocs.vanillaframework.io-staging%2Fbuild"
                 >
-                  <small>Deploy to staging</small>
+                  Deploy to staging
                 </a>
               </td>
             </tr>
@@ -161,10 +161,10 @@
               <td class="commit">...</td>
               <td class="human-time">...</td>
               <td>
-                <a class="p-button--neutral"
+                <a class="p-button--neutral" style="width: 100%"
                 href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Flimenet.snapcraft.io-staging%2Fbuild"
                 >
-                  <small>Deploy to staging</small>
+                  Deploy to staging
                 </a>
               </td>
             </tr>
@@ -219,10 +219,10 @@
               <td class="commit">...</td>
               <td class="human-time">...</td>
               <td>
-                <a class="p-button--neutral"
+                <a class="p-button--neutral" style="width: 100%"
                 href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Fsdrsatcom.snapcraft.io-staging%2Fbuild"
                 >
-                <small>Deploy to staging</small>
+                Deploy to staging
               </a>
             </td>
           </tr>
@@ -299,7 +299,7 @@
           let stagingCommitID = domainJson['staging']['commitId'];
           let productionCommitID = domainJson['production']['commitId'];
           imageTag.innerHTML = `<code>${domainJson['staging']['imageTag']}</code>`;
-          commit.innerHTML = `<a href="https://github.com/${domainRepositories[domainJson['staging']['domain']]}/commit/${stagingCommitID}">${stagingCommitID}</a>`;
+          commit.innerHTML = `<a  href="https://github.com/${domainRepositories[domainJson['staging']['domain']]}/commit/${stagingCommitID}">${stagingCommitID}</a>`;
           humanTime.textContent = domainJson['staging']['humanTime'];
         humanTime.dataset.sort = domainJson['staging']['epochTime'];
           if (release) {
@@ -370,30 +370,34 @@
           newRows.sort(function (a, b) {
             var c, d;
             // Trim the cell contents.
-            if (a.cells[col].dataset.sort && b.cells[col].dataset.sort) {
-              c = a.cells[col].dataset.sort;
-              d = b.cells[col].dataset.sort;
+            if (a.cells[col] && b.cells[col]) {
+              if (a.cells[col].dataset.sort && b.cells[col].dataset.sort) {
+                c = a.cells[col].dataset.sort;
+                d = b.cells[col].dataset.sort;
+              } else {
+                c = a.cells[col].textContent.trim();
+                d = b.cells[col].textContent.trim();
+              }
+              // If the content contains a number, parse it as a number.
+              // This is very crude and should not be considered production ready.
+              if (c.replace(/[^0-9]/gi, '') !== '' && !isNaN(c.replace(/[^0-9]/gi, ''))) {
+                c = parseInt(c.replace(/[^0-9]/gi, ''));
+                // Ascending for numbers and the alphabet are opposite.
+                direction *= -1;
+              }
+              if (d.replace(/[^0-9]/gi, '') !== '' && !isNaN(d.replace(/[^0-9]/gi, ''))) {
+                d = parseInt(d.replace(/[^0-9]/gi, ''));
+                // Ascending for numbers and the alphabet are opposite.
+                direction *= -1;
+              }
+              // Based on the direction, do the sort.
+              if (direction === 1) {
+                return c < d;
+              } else {
+                return c > d;
+              }
             } else {
-              c = a.cells[col].textContent.trim();
-              d = b.cells[col].textContent.trim();
-            }
-            // If the content contains a number, parse it as a number.
-            // This is very crude and should not be considered production ready.
-            if (c.replace(/[^0-9]/gi, '') !== '' && !isNaN(c.replace(/[^0-9]/gi, ''))) {
-              c = parseInt(c.replace(/[^0-9]/gi, ''));
-              // Ascending for numbers and the alphabet are opposite.
-              direction *= -1;
-            }
-            if (d.replace(/[^0-9]/gi, '') !== '' && !isNaN(d.replace(/[^0-9]/gi, ''))) {
-              d = parseInt(d.replace(/[^0-9]/gi, ''));
-              // Ascending for numbers and the alphabet are opposite.
-              direction *= -1;
-            }
-            // Based on the direction, do the sort.
-            if (direction === 1) {
               return c < d;
-            } else {
-              return c > d;
             }
           });
         }
