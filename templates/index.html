@@ -3,9 +3,10 @@
 <html>
 
 <head>
-  <title>Deployment portal</title>
+  <title>🚀 Deployment portal</title>
   <link rel="stylesheet" href="https://assets.ubuntu.com/v1/vanilla-framework-version-2.0.1.min.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" href="https://assets.ubuntu.com/v1/0843d517-favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
@@ -304,10 +305,10 @@
           if (release) {
             if (stagingCommitID !== productionCommitID) {
               release.innerHTML = `<a style="width: 100%" class="p-button--neutral" href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Fdeploy-to-${domainJson['staging']['domain']}%2Fparambuild%2F%3Fimage_tag%3D${domainJson['staging']['imageTag']}">` +
-                                  `  Release` +
+                                  `  Release 🚀` +
                                   `</a>`;
             } else {
-              release.innerHTML = "Up to date";
+              release.innerHTML = '<a style="width: 100%" class="p-button--neutral" href="#" disable="disable">Up to date 👍</a>';
             }
           }
       }

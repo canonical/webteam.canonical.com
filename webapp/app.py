@@ -34,7 +34,7 @@ def domain_info():
                 json.dumps(
                     {
                         "error": f"Couldn't find image tag "
-                        "for {staging_domain}"
+                        "for %s" % (staging_domain)
                     }
                 ),
                 402,
@@ -45,7 +45,7 @@ def domain_info():
                 json.dumps(
                     {
                         "error": f"Couldn't find image tag"
-                        " for {production_domain}"
+                        " for %s" % (production_domain)
                     }
                 ),
                 402,
@@ -61,7 +61,7 @@ def domain_info():
                 json.dumps(
                     {
                         "error": f"Image tag '{staging_image_tag}'"
-                        " for {staging_domain} in unexpected format"
+                        " for %s in unexpected format" % (staging_domain)
                     }
                 ),
                 402,
@@ -72,7 +72,7 @@ def domain_info():
                 json.dumps(
                     {
                         "error": f"Image tag '{production_image_tag}'"
-                        " for {production_domain} in unexpected format"
+                        " for %s in unexpected format" % (production_domain)
                     }
                 ),
                 402,
