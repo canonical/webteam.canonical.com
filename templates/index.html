@@ -291,12 +291,12 @@
         let stagingCommitID = domainJson['staging']['commitId'];
         let productionCommitID = domainJson['production']['commitId'];
         imageTag.innerHTML = `<code>${domainJson['staging']['imageTag']}</code>`;
-        commit.innerHTML = `<a  href="https://github.com/${domainRepositories[domainJson['staging']['domain']]}/commit/${stagingCommitID}">${stagingCommitID}</a>`;
+        commit.innerHTML = `<a href="https://github.com/${domainRepositories[domainJson['staging']['domain']]}/commit/${stagingCommitID}">${stagingCommitID}</a>`;
         humanTime.textContent = domainJson['staging']['humanTime'];
         humanTime.dataset.sort = domainJson['staging']['epochTime'];
         if (release) {
           if (stagingCommitID !== productionCommitID) {
-            release.innerHTML = `<a style="width: 100%" class="p-button--neutral" href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Fdeploy-to-${domainJson['staging']['domain']}%2Fparambuild%2F%3Fimage_tag%3D${domainJson['staging']['imageTag']}">` +
+            release.innerHTML = `<a style="width: 100%" class="p-button--neutral" href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2F${domainJson['production']['domain']}-production%2Fparambuild%2F%3Fimage_tag%3D${domainJson['staging']['imageTag']}">` +
               `  Release 🚀` +
               `</a>`;
             } else {
