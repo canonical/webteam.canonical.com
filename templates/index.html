@@ -291,7 +291,7 @@
         let stagingCommitID = domainJson['staging']['commitId'];
         let productionCommitID = domainJson['production']['commitId'];
         imageTag.innerHTML = `<code>${domainJson['staging']['imageTag']}</code>`;
-        commit.innerHTML = `<a href="https://github.com/${domainRepositories[domainJson['staging']['domain']]}/commit/${stagingCommitID}">${stagingCommitID}</a>`;
+        commit.innerHTML = `<a href="https://github.com/${domainRepositories[domainJson['production']['domain']]}/commit/${stagingCommitID}">${stagingCommitID}</a>`;
         humanTime.textContent = domainJson['staging']['humanTime'];
         humanTime.dataset.sort = domainJson['staging']['epochTime'];
         if (release) {
