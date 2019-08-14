@@ -1,2 +1,2 @@
-flask==1.0.3
-talisker[gunicorn]==0.14.3
+flask==1.1.1
+talisker[gunicorn]==0.15.0
