@@ -5,11 +5,11 @@ ENV LANG C.UTF-8
 WORKDIR /srv
 
 # System dependencies
-RUN apt-get update && apt-get install --yes python3-pip
+RUN apt-get update && apt-get install -y --no-install-recommends python3 python3-setuptools python3-pip
 
 # Import code, install code dependencies
-ADD . .
-RUN pip3 install -r requirements.txt
+COPY . .
+RUN python3 -m pip install --no-cache-dir -r requirements.txt
 
 # Set git commit ID
 ARG TALISKER_REVISION_ID
