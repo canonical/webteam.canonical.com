@@ -88,10 +88,17 @@ yarn.lock
 # Git, travis, docker
 .git
 .gitignore
+.circleci
+.codecov
+.github
 .travis.yml
 docker-compose.yml
 .docker
 Dockerfile
+
+# Environemnt
+.env
+.env.local
 
 # Sphinx documentation
 docs/_build/
@@ -101,6 +108,7 @@ docs/_build/
 node_modules/
 vendor/
 bower_components/
+package.json
 package-lock.json
 yarn.lock
 bin/
