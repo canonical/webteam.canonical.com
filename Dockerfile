@@ -27,5 +27,3 @@ ENV TALISKER_REVISION_ID "${BUILD_ID}"
 # Setup commands to run server
 ENTRYPOINT ["./entrypoint"]
 CMD ["0.0.0.0:80"]
-
-
