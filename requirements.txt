@@ -1,2 +1,2 @@
 flask==1.1.1
-talisker[gunicorn]==0.15.0
+talisker[gunicorn,gevent]==0.18.0
