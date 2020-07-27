@@ -2,6 +2,10 @@ domain: releases.demo.haus
 
 image: prod-comms.docker-registry.canonical.com/releases.demo.haus
 
+env:
+  - name: SENTRY_DSN
+    value: https://ac1f05d48419453ab98e9af52d0da6ae@sentry.is.canonical.com//35
+
 useProxy: false
 
 memoryLimit: 128Mi
