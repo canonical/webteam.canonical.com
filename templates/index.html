@@ -23,121 +23,26 @@
         <table class="p-table--sortable" role="grid">
           <thead>
             <tr>
-              <th width="250" role="columnheader" id="t-domain" aria-sort="none">Staging domain</th>
+              <th width="200" role="columnheader" id="t-domain" aria-sort="none">Staging domain</th>
               <th width="170" role="columnheader" id="t-tag" aria-sort="none">Image tag</th>
-              <th width="80" role="columnheader" id="t-commit" aria-sort="none">Commit</th>
-              <th width="230" role="columnheader" id="t-deployed" aria-sort="none">Deployed to staging</th>
-              <th width="125" id="t-release" aria-sort="none"></th>
+              <th width="220" role="columnheader" id="t-pr-title" aria-sort="none">PR title</th>
+              <th width="120" role="columnheader" id="t-pr-author" aria-sort="none">PR author</th>
+              <th width="180" role="columnheader" id="t-deployed" aria-sort="none">Deployed to staging</th>
+              <th width="120" id="t-release" aria-sort="none"></th>
             </tr>
           </thead>
           <tbody>
-            <tr data-domain="360.canonical.com">
-              <td><a href="https://360.staging.canonical.com" target="_blank">360.staging.canonical.com</a></td>
-              <td class="image-tag">...</td>
-              <td class="commit">...</td>
-              <td class="human-time">...</td>
-              <td class="release">...</td>
-            </tr>
-            <tr data-domain="anbox-cloud.io">
-              <td><a href="https://staging.anbox-cloud.io" target="_blank">anbox-cloud.io</a></td>
-              <td class="image-tag">...</td>
-              <td class="commit">...</td>
-              <td class="human-time">...</td>
-              <td class="release">...</td>
-            </tr>
-            <tr data-domain="canonical.com">
-              <td><a href="https://staging.canonical.com" target="_blank">staging.canonical.com</a></td>
-              <td class="image-tag">...</td>
-              <td class="commit">...</td>
-              <td class="human-time">...</td>
-              <td class="release">...</td>
-            </tr>
-            <tr data-domain="certification.ubuntu.com">
-              <td><a href="https://certification.staging.ubuntu.com" target="_blank">certification.staging.ubuntu.com</a></td>
-              <td class="image-tag">...</td>
-              <td class="commit">...</td>
-              <td class="human-time">...</td>
-              <td class="release">...</td>
-            </tr>
-            <tr data-domain="charmed-osm.com">
-              <td><a href="https://staging.charmed-osm.com" target="_blank">staging.charmed-osm.com</a></td>
-              <td class="image-tag">...</td>
-              <td class="commit">...</td>
-              <td class="human-time">...</td>
-              <td class="release">...</td>
-            </tr>
-            <tr data-domain="cloud-init.io">
-              <td><a href="https://staging.cloud-init.io" target="_blank">staging.cloud-init.io</a></td>
-              <td class="image-tag">...</td>
-              <td class="commit">...</td>
-              <td class="human-time">...</td>
-              <td class="release">...</td>
-            </tr>
-            <tr data-domain="conjure-up.io">
-              <td><a href="https://staging.conjure-up.io" target="_blank">staging.conjure-up.io</a></td>
-              <td class="image-tag">...</td>
-              <td class="commit">...</td>
-              <td class="human-time">...</td>
-              <td class="release">...</td>
-            </tr>
-            <tr data-domain="cn.ubuntu.com">
-              <td><a href="https://cn.staging.ubuntu.com" target="_blank">cn.staging.ubuntu.com</a></td>
-              <td class="image-tag">...</td>
-              <td class="commit">...</td>
-              <td class="human-time">...</td>
-              <td class="release">...</td>
-            </tr>
-            <tr data-domain="design.ubuntu.com">
-              <td><a href="https://design.staging.ubuntu.com" target="_blank">design.staging.ubuntu.com</a></td>
-              <td class="image-tag">...</td>
-              <td class="commit">...</td>
-              <td class="human-time">...</td>
-              <td class="release">...</td>
-            </tr>
-            <tr data-domain="docs.conjure-up.io">
-              <td><a href="https://docs.staging.conjure-up.io" target="_blank">docs.staging.conjure-up.io</a></td>
-              <td class="image-tag">...</td>
-              <td class="commit">...</td>
-              <td class="human-time">...</td>
-              <td class="release">...</td>
-            </tr>
-            <tr data-domain="docs.ubuntu.com">
-              <td><a href="https://docs.staging.ubuntu.com" target="_blank">docs.staging.ubuntu.com</a></td>
-              <td class="image-tag">...</td>
-              <td class="commit">...</td>
-              <td class="human-time">...</td>
-              <td class="release">...</td>
-            </tr>
-          <tr data-domain="engage.canonical.com">
-            <td><a href="https://engage.staging.canonical.com" target="_blank">engage.staging.canonical.com</a></td>
-            <td class="image-tag">...</td>
-            <td class="commit">...</td>
-            <td class="human-time">...</td>
-            <td class="release">...</td>
-          </tr>
-          <tr data-domain="jaas.ai">
-            <td><a href="https://staging.jaas.ai" target="_blank">staging.jaas.ai</a></td>
-            <td class="image-tag">...</td>
-            <td class="commit">...</td>
-            <td class="human-time">...</td>
-            <td class="release">...</td>
-          </tr>
-          <tr data-domain="jp.ubuntu.com">
-            <td><a href="https://jp.staging.ubuntu.com" target="_blank">jp.staging.ubuntu.com</a></td>
-            <td class="image-tag">...</td>
-            <td class="commit">...</td>
-            <td class="human-time">...</td>
-            <td class="release">...</td>
-          </tr>
-          <tr data-domain="limenet.snapcraft.io">
+          {% for site in domain_repositories %}
+          <tr data-domain="{{ site.production_domain }}" data-repo="{{ site.repository }}">
             <td>
-              <a href="https://limenet.staging.snapcraft.io" target="_blank">limenet.staging.snapcraft.io</a><br />
-              <small>(not automatically updated)</small>
+              <a href="https://{{ site.staging_domain }}" target="_blank">{{ site.staging_domain }}</a><br />
+              {% if "description" in site %}<small>{{ site.description }}</small>{% endif %}
             </td>
             <td class="image-tag">...</td>
-            <td class="commit">...</td>
+            <td class="pr-title">...</td>
+            <td class="pr-author">...</td>
             <td class="human-time">...</td>
-            <td>
+            <td class="release">
               <a class="p-button--neutral" style="width: 100%"
               href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Flimenet.snapcraft.io-staging%2Fbuild"
               >
@@ -145,139 +50,18 @@
             </a>
           </td>
         </tr>
-        <tr data-domain="maas.io">
-          <td><a href="https://staging.maas.io" target="_blank">staging.maas.io</a></td>
-          <td class="image-tag">...</td>
-          <td class="commit">...</td>
-          <td class="human-time">...</td>
-          <td class="release">...</td>
-        </tr>
-        <tr data-domain="manager.assets.ubuntu.com">
-          <td><a href="https://manager.assets.staging.ubuntu.com" target="_blank">manager.assets.staging.ubuntu.com</a></td>
-          <td class="image-tag">...</td>
-          <td class="commit">...</td>
-          <td class="human-time">...</td>
-          <td class="release">...</td>
-        </tr>
-        <tr data-domain="microk8s.io">
-          <td><a href="https://staging.microk8s.io" target="_blank">staging.microk8s.io</a></td>
-          <td class="image-tag">...</td>
-          <td class="commit">...</td>
-          <td class="human-time">...</td>
-          <td class="release">...</td>
-        </tr>
-        <tr data-domain="microstack.run">
-          <td><a href="https://staging.microstack.run" target="_blank">staging.microstack.run</a></td>
-          <td class="image-tag">...</td>
-          <td class="commit">...</td>
-          <td class="human-time">...</td>
-          <td class="release">...</td>
-        </tr>
-        <tr data-domain="mir-server.io">
-          <td><a href="https://staging.mir-server.io" target="_blank">staging.mir-server.io</a></td>
-          <td class="image-tag">...</td>
-          <td class="commit">...</td>
-          <td class="human-time">...</td>
-          <td class="release">...</td>
-        </tr>
-        <tr data-domain="multipass.run">
-          <td><a href="https://staging.multipass.run" target="_blank">staging.multipass.run</a></td>
-          <td class="image-tag">...</td>
-          <td class="commit">...</td>
-          <td class="human-time">...</td>
-          <td class="release">...</td>
-        </tr>
-        <tr data-domain="netplan.io">
-          <td><a href="https://staging.netplan.io" target="_blank">staging.netplan.io</a></td>
-          <td class="image-tag">...</td>
-          <td class="commit">...</td>
-          <td class="human-time">...</td>
-          <td class="release">...</td>
-        </tr>
-        <tr data-domain="old-docs.jujucharms.com">
-          <td><a href="https://old-docs.staging.jujucharms.com" target="_blank">old-docs.staging.jujucharms.com</a></td>
-          <td class="image-tag">...</td>
-          <td class="commit">...</td>
-          <td class="human-time">...</td>
-          <td class="release">...</td>
-        </tr>
-        <tr data-domain="sdrsatcom.snapcraft.io">
-          <td>
-            <a href="https://sdrsatcom.staging.snapcraft.io" target="_blank">sdrsatcom.staging.snapcraft.io</a><br />
-            <small>(not automatically updated)</small>
-          </td>
-          <td class="image-tag">...</td>
-          <td class="commit">...</td>
-          <td class="human-time">...</td>
-          <td>
-            <a class="p-button--neutral" style="width: 100%"
-            href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Fsdrsatcom.snapcraft.io-staging%2Fbuild"
-            >
-            Deploy to staging
-          </a>
-        </td>
-      </tr>
-      <tr data-domain="snapcraft.io">
-        <td><a href="https://staging.snapcraft.io" target="_blank">staging.snapcraft.io</a></td>
-        <td class="image-tag">...</td>
-        <td class="commit">...</td>
-        <td class="human-time">...</td>
-        <td class="release">...</td>
-      </tr>
-      <tr data-domain="ubuntu.com">
-        <td><a href="https://staging.ubuntu.com" target="_blank">staging.ubuntu.com</a></td>
-        <td class="image-tag">...</td>
-        <td class="commit">...</td>
-        <td class="human-time">...</td>
-        <td class="release">...</td>
-      </tr>
-      <tr data-domain="vanillaframework.io">
-        <td><a href="https://staging.vanillaframework.io" target="_blank">staging.vanillaframework.io</a></td>
-        <td class="image-tag">...</td>
-        <td class="commit">...</td>
-        <td class="human-time">...</td>
-        <td class="release">...</td>
-      </tr>
+        {% endfor %}
     </tbody>
   </table>
 </div>
 </div>
 
 <script>
-  const domainRepositories = {
-    '360.canonical.com': 'canonical-web-and-design/360.canonical.com',
-    'anbox-cloud.io': 'canonical-web-and-design/anbox-cloud.io',
-    'canonical.com': 'canonical-web-and-design/www.canonical.com',
-    'certification.ubuntu.com': 'canonical-web-and-design/certification.ubuntu.com',
-    'charmed-osm.com': 'canonical-web-and-design/charmed-osm.com',
-    'cloud-init.io': 'canonical-web-and-design/cloud-init.io',
-    'cn.ubuntu.com': 'canonical-web-and-design/cn.ubuntu.com',
-    'conjure-up.io': 'canonical-web-and-design/conjure-up.io',
-    'design.ubuntu.com': 'canonical-web-and-design/design.ubuntu.com',
-    'docs.conjure-up.io': 'canonical-web-and-design/docs.conjure-up.io',
-    'docs.ubuntu.com': 'canonical-web-and-design/docs.ubuntu.com',
-    'engage.canonical.com': 'canonical-web-and-design/engage.canonical.com-public-cloud',
-    'jaas.ai': 'canonical-web-and-design/jaas.ai',
-    'jp.ubuntu.com': 'canonical-web-and-design/jp.ubuntu.com',
-    'limenet.snapcraft.io': 'canonical-web-and-design/snapcraft.io',
-    'maas.io': 'canonical-web-and-design/maas.io',
-    'manager.assets.ubuntu.com': 'canonical-web-and-design/manager.assets.ubuntu.com',
-    'microk8s.io': 'canonical-web-and-design/microk8s.io',
-    'microstack.run': 'canonical-web-and-design/microstack.run',
-    'mir-server.io': 'canonical-web-and-design/mir-server.io',
-    'multipass.run': 'canonical-web-and-design/multipass.run',
-    'netplan.io': 'canonical-web-and-design/netplan.io',
-    'old-docs.jujucharms.com': 'juju/docs',
-    'snapcraft.io': 'canonical-web-and-design/snapcraft.io',
-    'sdrsatcom.snapcraft.io': 'canonical-web-and-design/snapcraft.io',
-    'ubuntu.com': 'canonical-web-and-design/ubuntu.com',
-    'vanillaframework.io': 'canonical-web-and-design/vanilla-framework',
-  };
-
   function writeDomainDetails(domainRow) {
     return function (domainJson) {
       let imageTag = domainRow.querySelector('.image-tag');
-      let commit = domainRow.querySelector('.commit');
+      let prTitle = domainRow.querySelector('.pr-title');
+      let prAuthor = domainRow.querySelector('.pr-author');
       let humanTime = domainRow.querySelector('.human-time');
       let release = domainRow.querySelector('.release');
 
@@ -290,9 +74,11 @@
         let stagingCommitID = domainJson['staging']['commitId'];
         let productionCommitID = domainJson['production']['commitId'];
         imageTag.innerHTML = `<code>${domainJson['staging']['imageTag']}</code>`;
-        commit.innerHTML = `<a href="https://github.com/${domainRepositories[domainJson['production']['domain']]}/commit/${stagingCommitID}">${stagingCommitID}</a>`;
+        prTitle.innerHTML = domainJson['staging']['prTitle'] !== "" ? `<a href="${domainJson['staging']['prUrl']}">${domainJson['staging']['prTitle']}</a>` : "Could not find PR data";
+        prAuthor.innerHTML = domainJson['staging']['prAuthor'] !== "" ? `<a href="${domainJson['staging']['prAuthorUrl']}">${domainJson['staging']['prAuthor']}</a>` : "Could not find PR data";
         humanTime.textContent = domainJson['staging']['humanTime'];
         humanTime.dataset.sort = domainJson['staging']['epochTime'];
+
         if (release) {
           if (stagingCommitID !== productionCommitID) {
             release.innerHTML = `<a style="width: 100%" class="p-button--neutral" href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2F${domainJson['production']['domain']}-production%2Fparambuild%2F%3Fimage_tag%3D${domainJson['staging']['imageTag']}">` +
@@ -301,14 +87,17 @@
             } else {
               release.innerHTML = '<button style="width: 100%" class="p-button--neutral" disabled="true">Up to date 👍</button>';
             }
+          } else {
+
           }
         }
       }
     }
 
     document.querySelectorAll('[data-domain]').forEach(function (domainRow) {
-      let domain = domainRow.dataset.domain;
-      fetch(`/domain-info.json?domain=${domain}`)
+      const domain = domainRow.dataset.domain;
+      const repo = domainRow.dataset.repo;
+      fetch(`/domain-info.json?domain=${domain}&repo=${repo}`)
       .then(async function (response) {
         return response.json();
       })
@@ -464,5 +253,4 @@
   </footer>
 </main>
 </body>
-
 </html>
