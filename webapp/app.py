@@ -165,6 +165,8 @@ def domain_info():
                     {
                         "error": f"Couldn't find image tag"
                         f" for {staging_domain}"
+
+
                     }
                 ),
                 402,
