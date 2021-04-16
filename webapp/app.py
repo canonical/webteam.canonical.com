@@ -210,12 +210,13 @@ def domain_info():
             )
     else:
         headers = {
-            "authorization": f"Bearer {os.getenv('GITHUB_TOKEN')}",
+            "authorization": f"Bearer {os.getenv('RELEASES_GITHUB_TOKEN')}",
             "Accept": "application/vnd.github.groot-preview+json",
         }
 
         response = requests.get(
-            f"https://api.github.com/repos/{repository}/commits/{staging_match.group(2)}/pulls",
+            f"https://api.github.com/repos/{repository}/commits/"
+            f"{staging_match.group(2)}/pulls",
             headers=headers,
         )
         pr_title = ""
