@@ -26,6 +26,20 @@ class TestRoutes(unittest.TestCase):
 
         self.assertEqual(self.client.get("/not-found-url").status_code, 404)
 
+    def test_domain_info(self):
+        """
+        When requesting domain-info data with domain and repo params
+        we should return a 200 status code
+        we should return data that contains staging and production keys
+        """
+        endpoint = self.client.get(
+            "/domain-info.json?domain=ubuntu.com"
+            + "&repo=canonical-web-and-design/ubuntu.com"
+        )
+        self.assertEqual(endpoint.status_code, 200)
+        self.assertIn("staging", endpoint.json)
+        self.assertIn("production", endpoint.json)
+
 
 if __name__ == "__main__":
     unittest.main()

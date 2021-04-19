@@ -6,6 +6,11 @@ env:
   - name: SENTRY_DSN
     value: https://ac1f05d48419453ab98e9af52d0da6ae@sentry.is.canonical.com//35
 
+  - name: RELEASES_GITHUB_TOKEN
+    secretKeyRef:
+      key: releases-github-token
+      name: github-api
+
 useProxy: false
 
 memoryLimit: 128Mi
