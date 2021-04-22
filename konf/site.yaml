@@ -1,6 +1,6 @@
-domain: releases.demo.haus
+domain: webteam.canonical.com
 
-image: prod-comms.docker-registry.canonical.com/releases.demo.haus
+image: prod-comms.docker-registry.canonical.com/webteam.canonical.com
 
 env:
   - name: SENTRY_DSN
@@ -14,8 +14,6 @@ env:
 useProxy: false
 
 memoryLimit: 128Mi
-
-noTls: true
 
 # Overrides for production
 production:
