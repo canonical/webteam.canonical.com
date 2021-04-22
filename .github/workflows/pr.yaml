@@ -1,0 +1,103 @@
+name: PR checks
+on: pull_request
+env:
+  SECRET_KEY: insecure_test_key
+
+jobs:
+  run-image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: DOCKER_BUILDKIT=1 docker build --tag webteam.canonical.com .
+
+      - name: Run image
+        run: |
+          docker run --detach --env SECRET_KEY=insecure_secret_key --network host webteam.canonical.com
+          sleep 1
+          curl --head --fail --retry-delay 1 --retry 30 --retry-connrefused http://localhost
+
+  run-dotrun:
+    runs-on: ubuntu-latest
+  
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dotrun
+        run: |
+          sudo snap install dotrun
+          sudo chown root:root /
+
+      - name: Install dependencies
+        run: /snap/bin/dotrun install
+
+      - name: Build assets
+        run: /snap/bin/dotrun build
+
+      - name: Run dotrun
+        run: |
+          /snap/bin/dotrun serve &
+          curl --head --fail --retry-delay 1 --retry 30 --retry-connrefused http://localhost:8103
+
+  lint-python:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install python dependencies
+        run: | 
+          python3 -m pip install --upgrade pip
+          sudo pip3 install flake8 black
+
+      - name: Lint python
+        run: yarn lint-python
+
+  validate-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install konf
+        run: |
+          sudo snap install konf
+          sudo chown root:root /
+
+      - name: Install Kubeval
+        run: |
+          wget https://github.com/instrumenta/kubeval/releases/latest/download/kubeval-linux-amd64.tar.gz
+          tar xf kubeval-linux-amd64.tar.gz
+          sudo cp kubeval /usr/local/bin
+
+      - name: Validate all sites
+        run: |
+          konf staging deploy/site.yaml | kubeval -f -
+          konf production deploy/site.yaml | kubeval -f -
+
+  test-python:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dotrun
+        run: |
+          sudo snap install dotrun
+          sudo chown root:root /
+
+      - name: Install dependencies
+        run: /snap/bin/dotrun install
+
+      - name: Build assets
+        run: /snap/bin/dotrun build
+
+      - name: Install dependencies
+        run: /snap/bin/dotrun exec pip3 install coverage
+
+      - name: Run tests with coverage
+        run: |
+          /snap/bin/dotrun exec coverage run --source=. -m unittest discover tests
+          bash <(curl -s https://codecov.io/bash) -cF python
