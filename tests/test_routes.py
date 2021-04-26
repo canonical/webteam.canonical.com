@@ -33,7 +33,7 @@ class TestRoutes(unittest.TestCase):
         we should return data that contains staging and production keys
         """
         endpoint = self.client.get(
-            "/domain-info.json?domain=ubuntu.com"
+            "/releases/domain-info.json?domain=ubuntu.com"
             + "&repo=canonical-web-and-design/ubuntu.com"
         )
         self.assertEqual(endpoint.status_code, 200)

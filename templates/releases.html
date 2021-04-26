@@ -1,23 +1,8 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html>
+{% block title%}🚀 Deployment portal{% endblock %}
 
-<head>
-  <title>🚀 Deployment portal</title>
-  <link rel="stylesheet" href="https://assets.ubuntu.com/v1/vanilla-framework-version-2.0.1.min.css" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="shortcut icon" href="https://assets.ubuntu.com/v1/0843d517-favicon.ico" type="image/x-icon" />
-</head>
-
-<body>
-  <main class="p-content">
-    <div class="p-strip--image p-strip--light" style="background-image: url('https://assets.ubuntu.com/v1/06a0285e-image-background-paper.png');">
-      <div class="row">
-        <h1>Web &amp; design team deployment portal</h1>
-        <p>A portal to help push releases from staging to production</p>
-      </div>
-    </div>
-
+{% block content %}
     <div class="p-strip is-shallow is-bordered">
       <div class="row" style="overflow: auto">
         <table class="p-table--sortable" role="grid">
@@ -95,7 +80,7 @@
     document.querySelectorAll('[data-domain]').forEach(function (domainRow) {
       const domain = domainRow.dataset.domain;
       const repo = domainRow.dataset.repo;
-      fetch(`/domain-info.json?domain=${domain}&repo=${repo}`)
+      fetch(`/releases/domain-info.json?domain=${domain}&repo=${repo}`)
       .then(async function (response) {
         return response.json();
       })
@@ -226,26 +211,4 @@
     </div>
   </div>
   <hr />
-  <footer class="p-strip is-shallow">
-    <div class="row">
-      <div class="col-12">
-        © 2019 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.
-        <nav>
-          <ul class="p-inline-list--middot">
-            <li class="p-inline-list__item">
-              <a href="https://www.ubuntu.com/legal">Legal info</a>
-            </li>
-            <li class="p-inline-list__item">
-              <a href="https://github.com/canonical-web-and-design/releases.demo.haus/issues/new">Report a bug with this site</a>
-            </li>
-          </ul>
-          <span class="u-off-screen">
-            <a href="#">Go to the top of the page</a>
-          </span>
-        </nav>
-      </div>
-    </div>
-  </footer>
-</main>
-</body>
-</html>
+{% endblock content %}

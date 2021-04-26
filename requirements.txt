@@ -1,3 +1,3 @@
-flask==1.1.2
-talisker[gunicorn,gevent]==0.18.0
+canonicalwebteam.flask-base==0.9.0
+canonicalwebteam.discourse==3.0.8
 humanize==3.2.0

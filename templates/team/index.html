@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}List of awesome people{% endblock %}
+{% block description %}{% endblock %}
+
+{% block content %}
+<section class="p-strip">
+  <div class="row">
+    <div class="col-12">
+      <h1>Awesome people of the webteam!</h1>
+      <p>Total: <strong>{{ display_names|length }}</strong></p>
+      <ul>
+        {% for name in display_names %}
+          <li>{{ name }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+{% endblock content %}
