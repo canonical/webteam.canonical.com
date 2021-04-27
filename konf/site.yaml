@@ -11,8 +11,6 @@ env:
       key: releases-github-token
       name: github-api
 
-useProxy: false
-
 memoryLimit: 128Mi
 
 # Overrides for production
