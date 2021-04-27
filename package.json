@@ -1,7 +1,8 @@
 {
   "scripts": {
     "clean": "rm -rf node_modules yarn-error.log css static/css *.log *.sqlite _site/ build/ .jekyll-metadata .bundle",
-    "start": "./entrypoint 0.0.0.0:$PORT",
+    "serve": "./entrypoint 0.0.0.0:$PORT",
+    "start": "yarn run serve",
     "build": "echo 'nothing to build'",
     "format-python": "black --line-length 79 webapp",
     "test": "yarn run lint-python && yarn run test-python",
