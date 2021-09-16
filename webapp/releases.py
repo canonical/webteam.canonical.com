@@ -10,6 +10,11 @@ import os
 
 domain_repositories = [
     {
+        "production_domain": "hiring.canonical.com",
+        "staging_domain": "hiring.staging.canonical.com",
+        "repository": "canonical-web-and-design/greenhouse-exporter",
+    },
+    {
         "production_domain": "360.canonical.com",
         "staging_domain": "360.staging.canonical.com",
         "repository": "canonical-web-and-design/360.canonical.com",
