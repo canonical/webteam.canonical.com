@@ -15,6 +15,7 @@ app = FlaskBase(
 
 
 @app.route("/")
+@app.route("/create")
 def index():
     return flask.render_template("homepage.html")
 
