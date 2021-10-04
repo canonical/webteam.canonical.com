@@ -10,3 +10,4 @@
     "lint-python": "flake8 webapp tests && black --check --line-length 79 webapp tests"
   }
 }
+

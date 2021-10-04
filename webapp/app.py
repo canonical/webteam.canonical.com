@@ -4,6 +4,7 @@ from canonicalwebteam.flask_base.app import FlaskBase
 from webapp.guides import discourse_docs
 from webapp.team import webteam
 from webapp.releases import releases
+from webapp.eight_ball import eight_ball
 
 app = FlaskBase(
     __name__,
@@ -20,4 +21,5 @@ def index():
 
 app.register_blueprint(webteam, url_prefix="/team")
 app.register_blueprint(releases, url_prefix="/releases")
+app.register_blueprint(eight_ball, url_prefix="/eight-ball")
 discourse_docs.init_app(app)
