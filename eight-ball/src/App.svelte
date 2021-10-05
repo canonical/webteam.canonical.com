@@ -14,6 +14,16 @@
 </Router>
 
 <style>
+  @font-face {
+    font-display: optional;
+    font-family: "Ubuntu";
+    font-style: normal;
+    font-weight: 300;
+    src: url("https://assets.ubuntu.com/v1/e8c07df6-Ubuntu-L_W.woff2")
+        format("woff2"),
+      url("https://assets.ubuntu.com/v1/8619add2-Ubuntu-L_W.woff")
+        format("woff");
+  }
   .background {
     background-color: #030364;
     opacity: 1;
@@ -26,18 +36,10 @@
       repeating-linear-gradient(#7500cd55, #7500cd);
   }
 
-  .shelf {
-    position: fixed;
-    bottom: 0;
-    width: 100vw;
-    height: 10vh;
-    background: linear-gradient(#921212, rgb(84 0 0));
-  }
-
   :global(body) {
     margin: 0;
     padding: 0;
-    font-family: "Roboto", sans-serif;
+    font-family: "Ubuntu", sans-serif;
     font-size: 16px;
     color: #fff;
     height: 100vh;

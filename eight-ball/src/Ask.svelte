@@ -57,7 +57,7 @@
 </script>
 
 <main>
-  <h1>Canoniball</h1>
+  <h1>Can🎱niball</h1>
   <div class="form__group field">
     <input
       type="input"
@@ -85,7 +85,7 @@
   }
 
   h1 {
-    color: #ff3e00;
+    color: #e95420;
     text-transform: uppercase;
     font-size: 4em;
     font-weight: 100;
