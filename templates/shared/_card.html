@@ -19,7 +19,7 @@
       {% endif %}
       {% if event.presenter3 %}
       <li>
-        <div class="p-media-object" style="margin-bottom: 2.5rem;">
+        <div class="p-media-object" {% if not event["5x5"] %}style="margin-bottom: 2.5rem;"{% endif %}>
           <img alt="" src=https://www.gravatar.com/avatar/{{event.presenter3_email_hash}} class="p-media-object__image is-round"/>
           <p>{{ event.presenter3 }}</p>
         </div>
