@@ -2,6 +2,7 @@
   import { Link } from "svelte-routing";
   import Ball from "./Ball.svelte";
   let answer = "";
+  let isShaking = false;
 
   const urlParams = new URLSearchParams(window.location.search);
 
@@ -37,11 +38,17 @@
   let shouldRepeat = true;
 
   function askQuestion() {
+    isShaking = true;
     const index = Math.floor(Math.random() * answers.length);
-    answer = answers[index];
+
     if (!shouldRepeat) {
       answers.splice(index, 1);
     }
+    // wait 1s before showing the answer
+    setTimeout(() => {
+      answer = answers[index];
+      isShaking = false;
+    }, 1000);
   }
 
   const resetList = () => {
@@ -59,7 +66,7 @@
   <button on:click={askQuestion}>Ask</button>
   <input type="checkbox" id="repeat" bind:checked={shouldRepeat} />
   <label for="repeat">Repeat</label>
-  <Ball {answer} />
+  <Ball {answer} {isShaking} />
   <button on:click={resetList}>Reset list</button>
   <Link to="create">Create</Link>
 </main>

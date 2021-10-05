@@ -1,19 +1,22 @@
 <script>
   export let answer;
+  export let isShaking;
+  import { fade } from "svelte/transition";
 </script>
 
-<div class="ball {answer ? 'shake' : ''} ">
-  <div class="hole">
-    {#if !!answer}
-      <div class="triangle">
-        <p class="text">
-          {answer}
-        </p>
-      </div>
+<div class="ball">
+  <div class="window">
+    <div class="triangle">
+      <p class="text">
+        {answer}
+      </p>
+    </div>
+    <div class="shadow" />
+    {#if !answer || isShaking}
+      <div transition:fade class="overlay" />
     {/if}
   </div>
 </div>
-<div class="shadow" />
 
 <style>
   .ball {
@@ -26,36 +29,56 @@
     align-items: center;
     background: radial-gradient(circle at 30% 30%, #333, #000);
   }
-
-  .shadow {
-    margin-left: 0;
-    margin-top: -20px;
-    width: 600px;
-    height: 50px;
-    background: radial-gradient(#000f, #fff0 72%);
-    border-radius: 50%;
-  }
-  .hole {
+  .window {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background-color: white;
+    background-color: black;
+    position: relative;
   }
 
   .triangle {
     width: 0;
     height: 0;
-    border-left: 100px solid transparent;
-    border-right: 100px solid transparent;
-    border-bottom: 150px solid blue;
-    display: flex;
-    justify-content: center;
+    border-left: 70px solid transparent;
+    border-right: 70px solid transparent;
+    border-top: 100px solid blue;
+    position: absolute;
+    top: 50px;
+    left: 30px;
+    font-family: sans-serif;
+    font-variant: small-caps;
+    animation: floating 6s linear infinite;
+  }
+
+  .shadow {
+    z-index: 1;
+    position: absolute;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+    animation: rotating 6s infinite linear;
+  }
+
+  .overlay {
+    z-index: 10;
+    position: absolute;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    background-color: black;
   }
   .text {
-    color: white;
-    font-size: 50px;
-    font-weight: bold;
+    position: absolute;
+    top: -100px;
+    left: -28px;
+    font-size: 12px;
+    width: 60px;
     text-align: center;
+    font-family: sans-serif;
+    font-variant: small-caps;
+    color: white;
   }
 
   @keyframes shake {
@@ -119,5 +142,22 @@
   }
   .shake {
     animation: shake 1.2s ease-out 2;
+  }
+
+  /* Triangle gently floating around */
+  @keyframes floating {
+    from {
+      transform: rotateZ(0) rotateY(15deg) translateZ(50px) rotateZ(0);
+    }
+    to {
+      transform: rotateZ(1turn) rotateY(15deg) translateZ(50px) rotateZ(-1turn);
+    }
+  }
+
+  /* Roatating shadow */
+  @keyframes rotating {
+    to {
+      transform: rotate(1turn);
+    }
   }
 </style>
