@@ -2,7 +2,7 @@
   export let answer;
 </script>
 
-<div class="ball">
+<div class="ball {answer ? 'shake' : ''} ">
   <div class="hole">
     {#if !!answer}
       <div class="triangle">
