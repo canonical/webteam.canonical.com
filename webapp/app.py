@@ -24,3 +24,11 @@ app.register_blueprint(webteam, url_prefix="/team")
 app.register_blueprint(releases, url_prefix="/releases")
 app.register_blueprint(eight_ball, url_prefix="/eight-ball")
 discourse_docs.init_app(app)
+
+
+# Path for all the static files (compiled JS/CSS, etc.) for the 
+# 8-ball app. This should be in the blueprint, but then it does
+# not work
+@app.route("/<path:path>")
+def home(path):
+    return flask.send_from_directory("../eight-ball/public", path)
