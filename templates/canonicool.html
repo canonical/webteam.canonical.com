@@ -61,8 +61,4 @@
   </div>
 </section>
 
-{% with total_results=past_events|length, total_pages=past_events|length / 6, offset=offset, limit=limit %}
-{% include "shared/_pagination.html" %}
-{% endwith %}
-
 {% endblock %}

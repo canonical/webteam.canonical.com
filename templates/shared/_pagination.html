@@ -1,15 +1,14 @@
-{% if offset >= total_results %}
+{% if offset >= total_past_events %}
   {% set current_page = 1 %}
 {% else %}
   {% set current_page = ((offset / limit) + 1) | int %}
 {% endif %}
 
-{{ total_results }}
+{{ total_past_events }}
 {{ limit }}
-{{ current_page }}
-{{ offset }}
+{{ total_pages }}
 
-{% if total_results > limit %}
+{% if total_past_events > limit %}
 <div class="u-fixed-width">
   <ol class="p-pagination u-align--center">
     <li class="p-pagination__item">

@@ -2,6 +2,7 @@ import requests
 import os
 import humanize
 import hashlib
+import math
 
 from datetime import datetime
 from dateutil import parser
@@ -9,7 +10,7 @@ from flask import Blueprint, render_template, request
 
 DEPLOYMENT_ID = os.getenv(
     "DEPLOYMENT_ID",
-    "AKfycbwVuk2KDgn1o9396H4TzFL0W7a1Y0c6OQw_sqVi8aKCIbKTYO-JGeOi4GUfpv0zeB-z",
+    "AKfycbxml18LuuG6tgJ2Dr8n1OLMgvrK4djN94GUje3I2-wt6LgXXGcHeHiXY3hG6dUrLByw",
 )
 CANONICOOL_SHEET_URL = (
     f"https://script.google.com/macros/s/{DEPLOYMENT_ID}/exec"
@@ -45,9 +46,11 @@ def index():
         canonicool_session["presenter1_email_hash"] = hash_email(
             canonicool_session["presenter1_email"]
         )
+
         canonicool_session["presenter2_email_hash"] = hash_email(
             canonicool_session["presenter2_email"]
         )
+    
         canonicool_session["presenter3_email_hash"] = hash_email(
             canonicool_session["presenter3_email"]
         )
@@ -56,11 +59,10 @@ def index():
         elif today <= session_date.replace(tzinfo=None):
             future_events.append(canonicool_session)
 
+    paginated_past_events = past_events[0:6]
+
     return render_template(
         "canonicool.html",
-        past_events=past_events,
+        past_events=paginated_past_events,
         future_events=future_events,
-        page=page,
-        limit=limit,
-        offset=offset,
     )
