@@ -2,10 +2,119 @@
 
 {% block content %}
 
-{{future_events}}
+<section class="p-strip--suru-blog-header is-deep">
+  <div class="u-fixed-width">
+    <h1 class="u-sv2">Canonicool sessions</h1>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <h2 class="p-heading--4">Next session's presenters</h2>
+      <div class="p-card--highlighted">
+        {% if future_events %}
+        <h3 class="p-muted-heading">{{ future_events[0].human_date }}</h3>
+        <hr class="content-separator">
+        <p class="p-card__content">
+          <ul class="p-list">
+            <li>{{ future_events[0].presenter1 }}</li>
+            <li>{{ future_events[0].presenter2 }}</li>
+            <li>{{ future_events[0].presenter3 }}</li>
+          </ul>
+        </p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-7 col-start-large-6">
+      <h2 class="p-heading--4">About Canonicool sessions</h2>
+      <p>
+        Canonicool Sessions are an opportunity for the team to come together at the end of a week and socialise about anything.
+      </p>
+      <p>
+        Presenters are picked at random to talk about a topic of their choice. It can be anything; we've had ballads about lawnmowers, cocktail making classes and run downs of the best things to eat at Tescos, or watch things like TED talks which will help or inspire the whole team.
+        5X5 are a little different. They give new team members a chance to introduce themselves. Presentations should be 5 slides presented in 5 minutes, although this isn't a hard and fast rule.
+      </p>
+      <p>
+        If for any reason you cannot present or have any questions, please get in touch with someone canonicool@lists.canonical.com
+      </p>
+    </div>
+  </div>
+  <div class="u-fixed-width">
+    <h2 class="p-heading--4">Upcoming presenters</h2>
+  </div>
+  <div class="row u-equal-height">
+    <div class="col-4">
+      <div class="p-card--highlighted">
+        {% if future_events[1] %}
+        <h3 class="p-muted-heading">{{ future_events[1].human_date }}</h3>
+        <hr class="content-separator">
+        <p class="p-card__content">
+          <ul class="p-list">
+            
+              <li>{{ future_events[1].presenter1 }}</li>
+              <li>{{ future_events[1].presenter2 }}</li>
+              <li>{{ future_events[1].presenter3 }}</li>
+          </ul>
+        </p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="p-card--highlighted">
+        {% if future_events[2] %}
+        <h3 class="p-muted-heading">{{ future_events[2].human_date }}</h3>
+        <hr class="content-separator">
+        <p class="p-card__content">
+          <ul class="p-list">
+              <li>{{ future_events[2].presenter1 }}</li>
+              <li>{{ future_events[2].presenter2 }}</li>
+              <li>{{ future_events[2].presenter3 }}</li>
+          </ul>
+        </p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="p-card--highlighted">
+        {% if future_events[3] %}
+        <h3 class="p-muted-heading">{{ future_events[3].human_date }}</h3>
+        <hr class="content-separator">
+        <p class="p-card__content">
+          <ul class="p-list">
+              <li>{{ future_events[3].presenter1 }}</li>
+              <li>{{ future_events[3].presenter2 }}</li>
+              <li>{{ future_events[3].presenter3 }}</li>
+          </ul>
+        </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
 
+<section class="p-strip">
+  <div class="u-fixed-width">
+    <h2 class="p-heading--4">Previous presenters</h2>
+  </div>
+  <div class="row u-equal-height">
+    {% for past_event in past_events %}
+    <div class="col-4">
+      <div class="p-card--highlighted">
+        <h3 class="p-muted-heading">{{ past_event.human_date }}</h3>
+        <hr class="content-separator">
+        <p class="p-card__content">
+          <ul class="p-list">
+            <li>{{ past_event.presenter1 }}</li>
+            <li>{{ past_event.presenter2 }}</li>
+            <li>{{ past_event.presenter3 }}</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
 
-<h1>lol</h1>
+{% with total_results=past_events|length, total_pages=past_events|length / 6, offset=offset, limit=limit %}
+{% include "shared/_pagination.html" %}
+{% endwith %}
 
-{{past_events}}
 {% endblock %}
