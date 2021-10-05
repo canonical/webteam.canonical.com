@@ -1,15 +1,30 @@
 <script>
   export let answer;
   export let isShaking;
+  export let askQuestion;
   let hasHadAnAnswer = false;
 
   $: if (isShaking) {
     hasHadAnAnswer = true;
   }
   import { fade } from "svelte/transition";
-</script>
+  
+  let disableHover = false;
+  let m = { x: 0, y: 0 };
+      
+  function handleMousemove(event) {
+    m.x = event.clientX;
+    m.y = event.clientY;
+  }
+  
+  function handleClick(event){
+    setTimeout(askQuestion, 1000)
+    disableHover= !disableHover
+    setTimeout( () => disableHover =!disableHover , 7000)
+  }
+ </script>
 
-<div class="ball-wrapper">
+<div class="ball-wrapper {disableHover ? 'nohover shake' : ''}" on:mousemove={handleMousemove}  style="top:{m.y}px; left:{m.x}px" on:click={handleClick}>
   <div class="ball" class:zooming={hasHadAnAnswer && !isShaking}>
     <div class="window">
       <div class="triangle">
@@ -27,16 +42,17 @@
 
 <style>
   .ball-wrapper {
-    position: absolute;
-    animation: hover 10s ease-in-out infinite;
-    top: 40vh;
-    left: calc(50% - 25vh);
+    width: 50vh;
+    height: 50vh;
+    margin:0 auto;
+    padding: 20px 0;
+    animation: 10s ease-in-out infinite;
   }
   .ball {
     width: 50vh;
     height: 50vh;
     border-radius: 50%;
-
+    margin:0 auto;
     background: radial-gradient(
       circle at 65% 15%,
       white 1px,
@@ -44,12 +60,11 @@
       rgb(12, 12, 12) 60%,
       rgb(39, 39, 39) 100%
     );
-
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
     animation: hover 10s ease-in-out infinite;
+    pointer-events: none;
   }
 
   .window {
@@ -212,5 +227,15 @@
     100% {
       transform: scale(1);
     }
+  }
+  .nohover {
+    pointer-events: none;
+  }
+  .ball-wrapper:hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
   }
 </style>

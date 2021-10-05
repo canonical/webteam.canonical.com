@@ -71,10 +71,12 @@
     />
     <label for="Question" class="form__label">Question</label>
   </div>
-  <button class="button" on:click={askQuestion}>Ask</button>
-  <input type="checkbox" id="repeat" bind:checked={shouldRepeat} />
-  <label for="repeat">Repeat</label>
-  <Ball {answer} {isShaking} />
+  <div class="button-wrapper">
+    <button class="button" on:click={askQuestion}>Ask</button>
+    <input type="checkbox" id="repeat" bind:checked={shouldRepeat} />
+    <label for="repeat">Repeat</label>
+  </div>
+  <Ball {answer} {isShaking} {askQuestion}/>
   <button class="button" on:click={resetList}>Reset list</button>
   <Link to="create">Create</Link>
 </main>
@@ -159,7 +161,11 @@
   .form__field:invalid {
     box-shadow: none;
   }
-
+  .button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .button {
     display: inline-flex;
     align-items: center;
