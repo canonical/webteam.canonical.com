@@ -4,9 +4,15 @@
     "serve": "./entrypoint 0.0.0.0:$PORT",
     "start": "yarn run serve",
     "build": "echo 'nothing to build'",
+    "build-css": "sass -w --load-path=node_modules src:static/css --style=compressed",
+    "watch-css": "yarn build-css && sass --load-path=node_modules -w src:static/css --style=compressed",
     "format-python": "black --line-length 79 webapp",
     "test": "yarn run lint-python && yarn run test-python",
     "test-python": "python3 -m unittest discover tests",
     "lint-python": "flake8 webapp tests && black --check --line-length 79 webapp tests"
+  },
+  "dependencies": {
+    "sass": "^1.42.1",
+    "vanilla-framework": "^2.36.0"
   }
 }

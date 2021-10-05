@@ -1,0 +1,29 @@
+.p-strip--suru-blog-header {
+  background-blend-mode: multiply, multiply, normal;
+  background-image: linear-gradient(
+      150deg,
+      rgba(228, 228, 228, 0.54) 0%,
+      rgba(228, 228, 228, 0.54) 54.9%,
+      rgba(228, 228, 228, 0) 55%,
+      rgba(228, 228, 228, 0) 100%
+    ),
+    linear-gradient(
+      to bottom left,
+      rgba(216, 216, 216, 0.54) 0%,
+      rgba(216, 216, 216, 0.54) 49.9%,
+      rgba(216, 216, 216, 0) 50%,
+      rgba(216, 216, 216, 0) 100%
+    ),
+    linear-gradient(-89deg, #e95420 0%, #772953 42%, #2c001e 94%);
+  background-position: bottom left, bottom 0 right, 0% 0%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%, 60% 100%, auto;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+.content-separator {
+  background: #e95420;
+  height: 2px;
+}
