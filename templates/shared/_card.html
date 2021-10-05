@@ -25,6 +25,14 @@
         </div>
       </li>
       {% endif %}
+      {% if event["5x5"] %}
+      <li>
+        <div class="p-media-object" style="margin-bottom: 2.5rem;">
+          <img alt="" src=https://www.gravatar.com/avatar/{{event["5x5_email_hash"]}} class="p-media-object__image is-round"/>
+          <p>{{ event["5x5"] }} </p>
+        </div>
+      </li>
+      {% endif %}
     </ul>
 
     {% if event.video %}
