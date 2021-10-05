@@ -58,12 +58,21 @@
 
 <main>
   <h1>Canoniball</h1>
-  <input type="text" placeholder="Ask a question to the magic 8 ball" />
-  <button on:click={askQuestion}>Ask</button>
+  <div class="form__group field">
+    <input
+      type="input"
+      class="form__field"
+      placeholder="Question"
+      name="Question"
+      id="Question"
+    />
+    <label for="Question" class="form__label">Question</label>
+  </div>
+  <button class="button" on:click={askQuestion}>Ask</button>
   <input type="checkbox" id="repeat" bind:checked={shouldRepeat} />
   <label for="repeat">Repeat</label>
   <Ball {answer} {isShaking} />
-  <button on:click={resetList}>Reset list</button>
+  <button class="button" on:click={resetList}>Reset list</button>
   <Link to="create">Create</Link>
 </main>
 
@@ -86,5 +95,92 @@
     main {
       max-width: none;
     }
+  }
+
+  .form__group {
+    position: relative;
+    padding: 15px 0 0;
+    margin-top: 10px;
+    width: 50%;
+  }
+  .form__field {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid white;
+    outline: 0;
+    font-size: 1.3rem;
+    color: white;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+  }
+  .form__field::placeholder {
+    color: transparent;
+  }
+
+  .form__field:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+
+  .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: white;
+  }
+
+  .form__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, white, white);
+    border-image-slice: 1;
+  }
+
+  .form__field:focus ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: white;
+    font-weight: 700;
+  }
+  /* reset input */
+  .form__field:required,
+  .form__field:invalid {
+    box-shadow: none;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 2rem;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    backface-visibility: hidden;
+    border: 2px solid transparent;
+    border-radius: 3rem;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .button {
+    border-color: #fff;
+    transition: transform 0.2s cubic-bezier(0.235, 0, 0.05, 0.95);
+  }
+
+  .button:hover {
+    transform: perspective(1px) scale3d(1.044, 1.044, 1) translateZ(0) !important;
   }
 </style>

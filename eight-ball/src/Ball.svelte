@@ -1,11 +1,16 @@
 <script>
   export let answer;
   export let isShaking;
+  let hasHadAnAnswer = false;
+
+  $: if (isShaking) {
+    hasHadAnAnswer = true;
+  }
   import { fade } from "svelte/transition";
 </script>
 
 <div class="ball-wrapper">
-  <div class="ball" class:zooming={!isShaking}>
+  <div class="ball" class:zooming={hasHadAnAnswer && !isShaking}>
     <div class="window">
       <div class="triangle">
         <p class="text">
