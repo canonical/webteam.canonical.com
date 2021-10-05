@@ -33,6 +33,8 @@
     answers = urlParams.get("answers").split(",");
   }
 
+  let question = urlParams.get("q");
+
   const initialAnswersList = [...answers];
 
   let shouldRepeat = true;
@@ -65,6 +67,7 @@
       placeholder="Question"
       name="Question"
       id="Question"
+      bind:value={question}
     />
     <label for="Question" class="form__label">Question</label>
   </div>
