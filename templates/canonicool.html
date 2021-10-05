@@ -7,22 +7,9 @@
     <h1 class="u-sv2">Canonicool sessions</h1>
   </div>
   <div class="row">
-    <div class="col-4">
-      <h2 class="p-heading--4">Next session's presenters</h2>
-      <div class="p-card--highlighted">
-        {% if future_events %}
-        <h3 class="p-muted-heading">{{ future_events[0].human_date }}</h3>
-        <hr class="content-separator">
-        <p class="p-card__content">
-          <ul class="p-list">
-            <li><img src=https://www.gravatar.com/avatar/{{future_events[0].presenter1_email_hash}} className="p-media-object__image is-round"/>{{ future_events[0].presenter1 }}</li>
-            <li>{{ future_events[0].presenter2 }}</li>
-            <li>{{ future_events[0].presenter3 }}</li>
-          </ul>
-        </p>
-        {% endif %}
-      </div>
-    </div>
+    {% with event=future_events[0] %}
+      {% include "shared/_card.html" %}
+    {% endwith %}
     <div class="col-7 col-start-large-6">
       <h2 class="p-heading--4">About Canonicool sessions</h2>
       <p>
@@ -41,52 +28,15 @@
     <h2 class="p-heading--4">Upcoming presenters</h2>
   </div>
   <div class="row u-equal-height">
-    <div class="col-4">
-      <div class="p-card--highlighted">
-        {% if future_events[1] %}
-        <h3 class="p-muted-heading">{{ future_events[1].human_date }}</h3>
-        <hr class="content-separator">
-        <p class="p-card__content">
-          <ul class="p-list">
-            
-              <li>{{ future_events[1].presenter1 }}</li>
-              <li>{{ future_events[1].presenter2 }}</li>
-              <li>{{ future_events[1].presenter3 }}</li>
-          </ul>
-        </p>
-        {% endif %}
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="p-card--highlighted">
-        {% if future_events[2] %}
-        <h3 class="p-muted-heading">{{ future_events[2].human_date }}</h3>
-        <hr class="content-separator">
-        <p class="p-card__content">
-          <ul class="p-list">
-              <li>{{ future_events[2].presenter1 }}</li>
-              <li>{{ future_events[2].presenter2 }}</li>
-              <li>{{ future_events[2].presenter3 }}</li>
-          </ul>
-        </p>
-        {% endif %}
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="p-card--highlighted">
-        {% if future_events[3] %}
-        <h3 class="p-muted-heading">{{ future_events[3].human_date }}</h3>
-        <hr class="content-separator">
-        <p class="p-card__content">
-          <ul class="p-list">
-              <li>{{ future_events[3].presenter1 }}</li>
-              <li>{{ future_events[3].presenter2 }}</li>
-              <li>{{ future_events[3].presenter3 }}</li>
-          </ul>
-        </p>
-        {% endif %}
-      </div>
-    </div>
+    {% with event=future_events[1]%}
+      {% include "shared/_card.html" %}
+    {% endwith %} 
+    {% with event=future_events[2]%}
+      {% include "shared/_card.html" %}
+    {% endwith %}   
+    {% with event=future_events[3]%}
+      {% include "shared/_card.html" %}
+    {% endwith %}
   </div>
 </section>
 
@@ -96,19 +46,17 @@
   </div>
   <div class="row u-equal-height">
     {% for past_event in past_events %}
-    <div class="col-4">
-      <div class="p-card--highlighted">
-        <h3 class="p-muted-heading">{{ past_event.human_date }}</h3>
-        <hr class="content-separator">
-        <p class="p-card__content">
-          <ul class="p-list">
-            <li>{{ past_event.presenter1 }}</li>
-            <li>{{ past_event.presenter2 }}</li>
-            <li>{{ past_event.presenter3 }}</li>
-          </ul>
-        </p>
-      </div>
-    </div>
+      {% if loop.index % 3 == 0 %}
+        {% with event=past_event%}
+          {% include "shared/_card.html" %}
+        {% endwith %}
+        </div>
+        <div class="row u-equal-height">
+      {% else %}
+        {% with event=past_event%}
+          {% include "shared/_card.html" %}
+        {% endwith %}
+      {% endif %}
     {% endfor %}
   </div>
 </section>

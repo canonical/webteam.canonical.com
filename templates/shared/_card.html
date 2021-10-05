@@ -1,0 +1,31 @@
+
+<div class="p-card--highlighted col-4">
+  <h3 class="p-muted-heading">{{ event.human_date }}</h3>
+  <hr class="content-separator">
+  <p class="p-card__content">
+    <ul class="p-list">
+      <li>
+        <div class="p-media-object">
+          <img src=https://www.gravatar.com/avatar/{{event.presenter1_email_hash}} class="p-media-object__image is-round"/>
+          <p>{{ event.presenter1 }}</p>
+        </div>
+      </li>
+      {% if event.presenter2 %}
+      <li>
+        <div class="p-media-object">
+          <img src=https://www.gravatar.com/avatar/{{event.presenter2_email_hash}} class="p-media-object__image is-round"/>
+          <p>{{ event.presenter2 }}</p>
+        </div>
+      </li>
+      {% endif %}
+      {% if event.presenter3 %}
+      <li>
+        <div class="p-media-object">
+          <img src=https://www.gravatar.com/avatar/{{event.presenter3_email_hash}} class="p-media-object__image is-round"/>
+          <p>{{ event.presenter3 }}</p>
+        </div>
+      </li>
+      {% endif %}
+    </ul>
+  </p>
+</div>

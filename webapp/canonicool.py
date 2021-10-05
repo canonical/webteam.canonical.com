@@ -9,7 +9,7 @@ from flask import Blueprint, render_template, request
 
 DEPLOYMENT_ID = os.getenv(
     "DEPLOYMENT_ID",
-    "AKfycbwM5X59etlXHY8zfl-TnHIHF9B6Wi_-w0dq4Q1OhirunKpitzhAAezKtJAGeUYsHaXz",
+    "AKfycbwVuk2KDgn1o9396H4TzFL0W7a1Y0c6OQw_sqVi8aKCIbKTYO-JGeOi4GUfpv0zeB-z",
 )
 CANONICOOL_SHEET_URL = (
     f"https://script.google.com/macros/s/{DEPLOYMENT_ID}/exec"
