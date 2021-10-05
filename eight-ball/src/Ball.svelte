@@ -4,34 +4,53 @@
   import { fade } from "svelte/transition";
 </script>
 
-<div class="ball">
-  <div class="window">
-    <div class="triangle">
-      <p class="text">
-        {answer}
-      </p>
+<div class="ball-wrapper">
+  <div class="ball" class:zooming={!isShaking}>
+    <div class="window">
+      <div class="triangle">
+        <p class="text">
+          {answer}
+        </p>
+      </div>
+      <div class="shadow" />
+      {#if !answer || isShaking}
+        <div transition:fade class="overlay" />
+      {/if}
     </div>
-    <div class="shadow" />
-    {#if !answer || isShaking}
-      <div transition:fade class="overlay" />
-    {/if}
   </div>
 </div>
 
 <style>
+  .ball-wrapper {
+    position: absolute;
+    animation: hover 10s ease-in-out infinite;
+    top: 40vh;
+    left: calc(50% - 25vh);
+  }
   .ball {
-    width: 500px;
-    height: 500px;
+    width: 50vh;
+    height: 50vh;
     border-radius: 50%;
-    background-color: black;
+
+    background: radial-gradient(
+      circle at 65% 15%,
+      white 1px,
+      rgb(39, 39, 39) 3%,
+      rgb(12, 12, 12) 60%,
+      rgb(39, 39, 39) 100%
+    );
+
     display: flex;
     justify-content: center;
     align-items: center;
-    background: radial-gradient(circle at 30% 30%, #333, #000);
+    position: absolute;
+    animation: hover 10s ease-in-out infinite;
   }
+
   .window {
-    width: 200px;
-    height: 200px;
+    width: 20vh;
+    height: 20vh;
+    z-index: 5;
     border-radius: 50%;
     background-color: black;
     position: relative;
@@ -40,12 +59,12 @@
   .triangle {
     width: 0;
     height: 0;
-    border-left: 70px solid transparent;
-    border-right: 70px solid transparent;
-    border-top: 100px solid blue;
+    border-left: 7vh solid transparent;
+    border-right: 7vh solid transparent;
+    border-top: 10vh solid blue;
     position: absolute;
-    top: 50px;
-    left: 30px;
+    top: 5vh;
+    left: 3vh;
     font-family: sans-serif;
     font-variant: small-caps;
     animation: floating 6s linear infinite;
@@ -55,30 +74,33 @@
     z-index: 1;
     position: absolute;
     border-radius: 50%;
-    width: 200px;
-    height: 200px;
+    width: 20vh;
+    height: 20vh;
     background: linear-gradient(to left, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
     animation: rotating 6s infinite linear;
   }
-
   .overlay {
     z-index: 10;
     position: absolute;
     border-radius: 50%;
-    width: 200px;
-    height: 200px;
+    width: 20vh;
+    height: 20vh;
     background-color: black;
   }
   .text {
     position: absolute;
-    top: -100px;
-    left: -28px;
-    font-size: 12px;
-    width: 60px;
+    top: -10vh;
+    left: -2.8vh;
+    font-size: 1.2vh;
+    width: 6vh;
     text-align: center;
     font-family: sans-serif;
     font-variant: small-caps;
     color: white;
+  }
+
+  .zooming {
+    animation: zoom 6s forwards ease-in-out;
   }
 
   @keyframes shake {
@@ -89,10 +111,10 @@
       transform: rotate(2deg) translate(-4px, -1px);
     }
     10% {
-      transform: rotate(0deg) translate(0px, -5px);
+      transform: rotate(0deg) translate(vh, -5px);
     }
     15% {
-      transform: rotate(2deg) translate(4px, 0px);
+      transform: rotate(2deg) translate(4px, vh);
     }
     20% {
       transform: rotate(1deg) translate(-3px, 3px);
@@ -119,13 +141,13 @@
       transform: rotate(2deg) translate(-4px, -1px);
     }
     60% {
-      transform: rotate(0deg) translate(0px, -5px);
+      transform: rotate(0deg) translate(0, -5px);
     }
     65% {
-      transform: rotate(2deg) translate(4px, 0px);
+      transform: rotate(2deg) translate(4px, 0);
     }
     70% {
-      transform: rotate(1deg) translate(-3px, 3px);
+      transform: rotate(1deg) trans0px 0pxlate (-3px, 3px);
     }
     75% {
       transform: rotate(4deg) translate(4px, -3px);
@@ -137,7 +159,7 @@
       transform: rotate(1deg) translate(1px, -2px);
     }
     100% {
-      transform: rotate(0deg) translate(0px, 0px);
+      transform: rotate(0deg) translate(0, 0px);
     }
   }
   .shake {
@@ -147,10 +169,22 @@
   /* Triangle gently floating around */
   @keyframes floating {
     from {
-      transform: rotateZ(0) rotateY(15deg) translateZ(50px) rotateZ(0);
+      transform: rotateZ(0) rotateY(15deg) translateZ(5vh) rotateZ(0);
     }
     to {
-      transform: rotateZ(1turn) rotateY(15deg) translateZ(50px) rotateZ(-1turn);
+      transform: rotateZ(1turn) rotateY(15deg) translateZ(5vh) rotateZ(-1turn);
+    }
+  }
+
+  @keyframes hover {
+    0% {
+      transform: translatey(0px);
+    }
+    50% {
+      transform: translatey(-2vh);
+    }
+    100% {
+      transform: translatey(0px);
     }
   }
 
@@ -158,6 +192,20 @@
   @keyframes rotating {
     to {
       transform: rotate(1turn);
+    }
+  }
+  @keyframes zoom {
+    0% {
+      transform: scale(1);
+    }
+    20% {
+      transform: scale(3);
+    }
+    80% {
+      transform: scale(3);
+    }
+    100% {
+      transform: scale(1);
     }
   }
 </style>

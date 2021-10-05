@@ -57,11 +57,7 @@
 </script>
 
 <main>
-  <h1>Can8niball</h1>
-  <p>
-    Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn
-    how to build Svelte apps.
-  </p>
+  <h1>Canoniball</h1>
   <input type="text" placeholder="Ask a question to the magic 8 ball" />
   <button on:click={askQuestion}>Ask</button>
   <input type="checkbox" id="repeat" bind:checked={shouldRepeat} />
