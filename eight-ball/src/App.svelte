@@ -45,4 +45,13 @@
     height: 100vh;
     overflow: hidden;
   }
+
+  :global(button) {
+    border: transparent;
+    cursor: pointer;
+  }
+
+  :global(ul) {
+    padding: 0;
+  }
 </style>

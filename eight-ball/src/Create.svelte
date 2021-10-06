@@ -32,27 +32,41 @@
     bind:this={answerInput}
     on:keypress={onKeyPress}
   />
-  <button
-    on:click={addAnswer}
-    disabled={!answer}
-    type="submit"
-    class="btn btn--success">Add</button
+  <button on:click={addAnswer} disabled={!answer} type="submit" class="btn"
+    >Add</button
   >
-  <Link to="/?answers={answerList.toString()}"
-    ><button class="btn">Generate</button></Link
-  >
+
   <ul class="list">
     {#each answerList as answer, i}
       <li class="list__item">
-        {answer}
+        <span>{answer}</span>
         <button
           on:click={() => {
             removeItem(i);
-          }}>X</button
+          }}
+          ><svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#000000"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><line x1="18" y1="6" x2="6" y2="18" /><line
+              x1="6"
+              y1="6"
+              x2="18"
+              y2="18"
+            /></svg
+          ></button
         >
       </li>
     {/each}
   </ul>
+  <Link to="/?answers={answerList.toString()}"
+    ><button class="btn btn--success">Generate</button></Link
+  >
 </main>
 
 <style>
@@ -73,19 +87,25 @@
     font-size: 1.2rem;
   }
 
+  .btn:disabled {
+    background: #f1f1f1;
+    color: black;
+  }
+
   .btn--success {
-    background-color: green;
-    color: #fff;
+    background-color: #ffdc7d;
+    color: #000;
   }
 
   input {
     font-size: 16px;
-    font-family: inherit;
-    padding: 0.25em 0.5em;
+    padding: 0.25em 0.75em;
     border-radius: 0.5rem;
     transition: 180ms box-shadow ease-in-out;
     min-height: 44px;
-    width: 50%;
+    width: 90%;
+    max-width: 600px;
+    margin-right: 1rem;
   }
 
   input:focus {
@@ -96,9 +116,20 @@
   .list__item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     background: white;
     color: black;
-    font-size: 2rem;
+    font-size: 1.5rem;
     padding: 0.5rem 1.2rem;
+  }
+
+  .list__item > span {
+    width: 90%;
+  }
+
+  .list__item > button {
+    min-height: 44px;
+    font-size: 1.2rem;
+    padding: 0.25em 0.75em;
   }
 </style>
