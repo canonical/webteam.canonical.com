@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+{% if page == 1 %}
 <section class="p-strip--suru-blog-header is-deep">
   <div class="u-fixed-width">
     <h1 class="u-sv2">Canonicool sessions</h1>
@@ -40,6 +40,7 @@
     {% endwith %}
   </div>
 </section>
+{% endif %}
 
 <section class="p-strip">
   <div class="u-fixed-width">
