@@ -3,7 +3,7 @@ import os
 import humanize
 import hashlib
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from dateutil import parser
 from flask import Blueprint, render_template, request
 
@@ -38,7 +38,8 @@ def index():
     today = datetime.today()
 
     for canonicool_session in response.json():
-        session_date = parser.parse(canonicool_session["date"])
+        hour = timedelta(hours=1)
+        session_date = parser.parse(canonicool_session["date"]) + hour
         canonicool_session["human_date"] = humanize.naturalday(session_date)
         canonicool_session["presenter1_email_hash"] = hash_email(
             canonicool_session["presenter1_email"]
