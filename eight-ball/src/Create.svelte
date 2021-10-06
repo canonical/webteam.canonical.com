@@ -32,14 +32,17 @@
     bind:this={answerInput}
     on:keypress={onKeyPress}
   />
-  <button on:click={addAnswer} disabled={!answer} type="submit" class="btn"
-    >Add</button
+  <button
+    on:click={addAnswer}
+    disabled={!answer}
+    type="submit"
+    class="btn btn--primary">Add</button
   >
 
   <ul class="list">
     {#each answerList as answer, i}
       <li class="list__item">
-        <span>{answer}</span>
+        {answer}
         <button
           on:click={() => {
             removeItem(i);
@@ -65,7 +68,7 @@
     {/each}
   </ul>
   <Link to="/?answers={answerList.toString()}"
-    ><button class="btn btn--success">Generate</button></Link
+    ><button class="btn btn--secondary">Generate</button></Link
   >
 </main>
 
@@ -85,18 +88,28 @@
     min-height: 44px;
     border-radius: 0.5rem;
     font-size: 1.2rem;
-  }
-
-  .btn:disabled {
-    background: #f1f1f1;
-    color: black;
-  }
-
-  .btn--success {
-    background-color: #ffdc7d;
     color: #000;
+    transition: all 0.25s;
   }
 
+  .btn:hover {
+    transform: scale(1.1, 1.1);
+  }
+
+  .btn--primary {
+    background-color: #48c78e;
+  }
+
+  .btn--primary:hover {
+    background-color: #3ec487;
+  }
+
+  .btn--secondary:hover {
+    background-color: #ffe08a;
+  }
+  .btn--secondary {
+    background-color: #ffe08a;
+  }
   input {
     font-size: 16px;
     padding: 0.25em 0.75em;
@@ -121,10 +134,6 @@
     color: black;
     font-size: 1.5rem;
     padding: 0.5rem 1.2rem;
-  }
-
-  .list__item > span {
-    width: 90%;
   }
 
   .list__item > button {
