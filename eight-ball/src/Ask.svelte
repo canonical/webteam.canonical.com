@@ -71,14 +71,18 @@
     />
     <label for="Question" class="form__label">Question</label>
   </div>
-  <div class="button-wrapper">
-    <button class="button" on:click={askQuestion}>Ask</button>
-    <input type="checkbox" id="repeat" bind:checked={shouldRepeat} />
-    <label for="repeat">Repeat</label>
+  <Ball {answer} {isShaking} {askQuestion} />
+  <div class="bottom-wrapper">
+    <div class="button-wrapper">
+      <label class="switch">
+        <input type="checkbox" id="repeat" bind:checked={shouldRepeat} />
+        <span class="slider" />
+      </label>
+      <label for="repeat">Repeat answers</label>
+    </div>
+    <button class="button" on:click={resetList}>Reset list</button>
+    <Link to="create"><span class="button">Create</span></Link>
   </div>
-  <Ball {answer} {isShaking} {askQuestion}/>
-  <button class="button" on:click={resetList}>Reset list</button>
-  <Link to="create">Create</Link>
 </main>
 
 <style>
@@ -105,7 +109,7 @@
   .form__group {
     position: relative;
     padding: 15px 0 0;
-    margin-top: 10px;
+    margin: 10px auto 0;
     width: 50%;
   }
   .form__field {
@@ -162,7 +166,9 @@
     box-shadow: none;
   }
   .button-wrapper {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 1rem;
     justify-content: center;
     align-items: center;
   }
@@ -191,5 +197,61 @@
 
   .button:hover {
     transform: perspective(1px) scale3d(1.044, 1.044, 1) translateZ(0) !important;
+  }
+
+  /* The switch - the box around the slider */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0.4s;
+    border-radius: 34px;
+    border: 2px solid white;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 0px;
+    bottom: 0px;
+    transition: 0.4s;
+    border-radius: 50%;
+    border: 2px solid white;
+  }
+
+  input:checked + .slider:before {
+    background-color: white;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+
+  .bottom-wrapper {
+    width: 95%;
+    position: fixed;
+    bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
   }
 </style>
