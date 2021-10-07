@@ -16,7 +16,6 @@ app = FlaskBase(
 
 
 @app.route("/")
-@app.route("/create")
 def index():
     return flask.render_template("homepage.html")
 
@@ -26,11 +25,3 @@ app.register_blueprint(releases, url_prefix="/releases")
 app.register_blueprint(eight_ball, url_prefix="/eight-ball")
 app.register_blueprint(canonicool, url_prefix="/canonicool")
 discourse_docs.init_app(app)
-
-
-# Path for all the static files (compiled JS/CSS, etc.) for the 
-# 8-ball app. This should be in the blueprint, but then it does
-# not work
-@app.route("/<path:path>")
-def home(path):
-    return flask.send_from_directory("../eight-ball/public", path)
