@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if page == 1 %}
+<section class="p-strip--suru-blog-header is-deep">
+  <div class="u-fixed-width">
+    <h1 class="u-sv2">Canonicool sessions</h1>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <h2 class="p-heading--3">Presenters for the next session</h2>
+
+      <div class="row">
+        {% with event=future_events[0] %}
+          {% include "shared/_card.html" %}
+        {% endwith %}
+      </div>
+    </div>
+    <div class="col-7 col-start-large-6">
+      <h2 class="p-heading--3">About Canonicool sessions</h2>
+      <p>
+        Canonicool Sessions are an opportunity for the team to come together at the end of a week and socialise about anything.
+      </p>
+      <p>
+        Presenters are picked at random to talk about a topic of their choice. It can be anything; we've had ballads about lawnmowers, cocktail making classes and run downs of the best things to eat at Tescos, or watch things like TED talks which will help or inspire the whole team.
+        5X5 are a little different. They give new team members a chance to introduce themselves. Presentations should be 5 slides presented in 5 minutes, although this isn't a hard and fast rule.
+      </p>
+      <p>
+        If for any reason you cannot present or have any questions, please get in touch with someone canonicool@lists.canonical.com
+      </p>
+    </div>
+  </div>
+  <div class="u-fixed-width">
+    <h2 class="p-heading--3">Upcoming presenters</h2>
+  </div>
+  <div class="row u-equal-height">
+    {% with event=future_events[1]%}
+      {% include "shared/_card.html" %}
+    {% endwith %} 
+    {% with event=future_events[2]%}
+      {% include "shared/_card.html" %}
+    {% endwith %}   
+    {% with event=future_events[3]%}
+      {% include "shared/_card.html" %}
+    {% endwith %}
+  </div>
+</section>
+{% endif %}
+
+<section class="p-strip">
+  <div class="u-fixed-width">
+    <h2 class="p-heading--3">Previous presenters</h2>
+  </div>
+  <div class="row u-equal-height">
+    {% for past_event in past_events %}
+      {% if loop.index >= events_per_page * page - events_per_page + 1 and loop.index <= (page * events_per_page) %}
+        {% if loop.index % 3 == 0 %}
+          {% with event=past_event%}
+            {% include "shared/_card.html" %}
+          {% endwith %}
+          </div>
+          <div class="row u-equal-height">
+        {% else %}
+          {% with event=past_event%}
+            {% include "shared/_card.html" %}
+          {% endwith %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% include "shared/_pagination.html" %}
+
+{% endblock %}

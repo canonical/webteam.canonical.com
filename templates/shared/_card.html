@@ -1,0 +1,44 @@
+<div class="p-card--highlighted col-4" style="position: relative;">
+  <h3 class="p-muted-heading">{{ event.human_date }}</h3>
+  <hr class="content-separator">
+  <p class="p-card__content">
+    <ul class="p-list">
+      <li>
+        <div class="p-media-object">
+          <img alt="" src=https://www.gravatar.com/avatar/{{event.presenter1_email_hash}} class="p-media-object__image is-round"/>
+          <p>{{ event.presenter1 }}</p>
+        </div>
+      </li>
+      {% if event.presenter2 %}
+      <li>
+        <div class="p-media-object">
+          <img alt="" src=https://www.gravatar.com/avatar/{{event.presenter2_email_hash}} class="p-media-object__image is-round"/>
+          <p>{{ event.presenter2 }}</p>
+        </div>
+      </li>
+      {% endif %}
+      {% if event.presenter3 %}
+      <li>
+        <div class="p-media-object" {% if not event["5x5"] %}style="margin-bottom: 2.5rem;"{% endif %}>
+          <img alt="" src=https://www.gravatar.com/avatar/{{event.presenter3_email_hash}} class="p-media-object__image is-round"/>
+          <p>{{ event.presenter3 }}</p>
+        </div>
+      </li>
+      {% endif %}
+      {% if event["5x5"] %}
+      <li>
+        <div class="p-media-object" style="margin-bottom: 2.5rem;">
+          <img alt="" src=https://www.gravatar.com/avatar/{{event["5x5_email_hash"]}} class="p-media-object__image is-round"/>
+          <p>{{ event["5x5"] }}&emsp;<span class="p-label--new">5x5</span></p>
+        </div>
+      </li>
+      {% endif %}
+    </ul>
+
+    {% if event.video %}
+      <div style="position: absolute; bottom: 1rem;">
+        <a href="{{ event.video }}">Watch this session&nbsp;&rsaquo;</a>
+      </div>
+    {% endif %}
+  </p>
+</div>
