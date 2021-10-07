@@ -10,8 +10,12 @@ eight_ball = Blueprint(
 
 # Path for our main Svelte page
 @eight_ball.route("/")
+@eight_ball.route("/<path:path>")
 def app():
-    return send_from_directory("../eight-ball/public", "index.html")
+    if path:
+        return send_from_directory("../eight-ball/public", path)
+    else:
+        return send_from_directory("../eight-ball/public", "index.html")
 
 
 # Path for all the static files (compiled JS/CSS, etc.)
