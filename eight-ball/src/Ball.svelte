@@ -50,8 +50,7 @@
     z-index: 1000;
     width: 50vh;
     height: 50vh;
-    margin: 0 auto;
-    padding: 15vh 0;
+    margin: 15vh auto;
     animation: 10s ease-in-out infinite;
   }
   .ball {
