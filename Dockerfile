@@ -7,6 +7,21 @@ RUN apt-get update && apt-get install --no-install-recommends --yes python3 pyth
 ADD requirements.txt /tmp/requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip pip3 install --user --requirement /tmp/requirements.txt
 
+# Build stage: Install yarn dependencies
+# ===
+FROM node:12 AS yarn-dependencies
+WORKDIR /srv
+ADD package.json yarn.lock .
+RUN --mount=type=cache,target=/usr/local/share/.cache/yarn yarn install --production
+
+
+# Build stage: Run "yarn run build-css"
+# ===
+FROM yarn-dependencies AS build-css
+ADD src src
+RUN yarn run build-css
+
+
 # Build the production image
 # ===
 FROM ubuntu:focal
@@ -19,6 +34,7 @@ WORKDIR /srv
 COPY . .
 ENV PATH="/root/.local/bin:${PATH}"
 RUN rm -rf package.json yarn.lock .babelrc webpack.config.js requirements.txt
+COPY --from=build-css /srv/static/css static/css
 
 # Set git commit ID
 ARG BUILD_ID

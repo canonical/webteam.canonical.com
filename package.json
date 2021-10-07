@@ -3,13 +3,22 @@
     "clean": "rm -rf node_modules yarn-error.log css static/css *.log *.sqlite _site/ build/ .jekyll-metadata .bundle",
     "serve": "./entrypoint 0.0.0.0:$PORT",
     "prestart": "yarn run build-svelte",
-    "start": "yarn run serve",
-    "build": "echo 'nothing to build'",
+    "start": "yarn run build && yarn run serve",
+    "build": "yarn run build-css",
+    "build-css": "sass src:static/css --load-path=node_modules --style=compressed && postcss --use autoprefixer --replace 'static/css/**/*.css' --no-map",
+    "watch-css": "yarn build-css && sass --load-path=node_modules -w src:static/css --style=compressed",
     "format-python": "black --line-length 79 webapp",
     "build-svelte": "cd eight-ball && yarn run build",
     "test": "yarn run lint-python && yarn run test-python",
     "test-python": "python3 -m unittest discover tests",
     "lint-python": "flake8 webapp tests && black --check --line-length 79 webapp tests"
+  },
+  "dependencies": {
+    "autoprefixer": "10.2.4",
+    "sass": "^1.42.1",
+    "vanilla-framework": "^2.36.0",
+    "postcss": "8.2.10",
+    "postcss-cli": "8.3.1"
   }
 }
 
