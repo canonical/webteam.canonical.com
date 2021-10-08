@@ -11,7 +11,7 @@
     answerInput.focus();
   };
   const onKeyPress = (e) => {
-    if (e.key === "Enter") addAnswer();
+    if (answer !== "" && e.key === "Enter") addAnswer();
   };
 
   const removeItem = (index) => {
