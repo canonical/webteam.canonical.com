@@ -35,11 +35,16 @@ def index():
     future_events = []
     past_events = []
 
-    today = datetime.today()
+    today = datetime.today().date()
 
     for canonicool_session in response.json():
         hour = timedelta(hours=1)
-        session_date = parser.parse(canonicool_session["date"]) + hour
+        # for some reason the date is coming through as 11pm the previous day
+        # of the date given in the spreadsheet, so we add an hour to get the
+        # correct date
+        corrected_datetime = parser.parse(canonicool_session["date"]) + hour
+        session_date = corrected_datetime.date()
+
         canonicool_session["human_date"] = humanize.naturalday(session_date)
         canonicool_session["presenter1_email_hash"] = hash_email(
             canonicool_session["presenter1_email"]
@@ -53,9 +58,9 @@ def index():
         canonicool_session["5x5_email_hash"] = hash_email(
             canonicool_session["5x5_email"]
         )
-        if today > session_date.replace(tzinfo=None):
+        if today > session_date:
             past_events.insert(0, canonicool_session)
-        elif today <= session_date.replace(tzinfo=None):
+        elif today <= session_date:
             future_events.append(canonicool_session)
 
     events_per_page = 6
