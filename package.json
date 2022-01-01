@@ -16,6 +16,6 @@
     "sass": "^1.42.1",
     "vanilla-framework": "2.37.1",
     "postcss": "8.2.10",
-    "postcss-cli": "8.3.1"
+    "postcss-cli": "9.1.0"
   }
 }
