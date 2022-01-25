@@ -11,6 +11,16 @@ env:
       key: releases-github-token
       name: github-api
 
+  - name: DISCOURSE_API_KEY
+    secretKeyRef:
+      key: discourse_api_key
+      name: canonical-discourse
+
+  - name: DISCOURSE_API_USERNAME
+    secretKeyRef:
+      key: discourse-api-username
+      name: canonical-discourse
+
 memoryLimit: 128Mi
 
 # Overrides for production
