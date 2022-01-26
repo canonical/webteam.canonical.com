@@ -1,7 +1,8 @@
 import flask
 from canonicalwebteam.flask_base.app import FlaskBase
 
-from webapp.guides import discourse_docs
+from webapp.guides import init_docs
+from webapp.sso import init_sso
 from webapp.team import webteam
 from webapp.releases import releases
 from webapp.canonicool import canonicool
@@ -22,4 +23,5 @@ def index():
 app.register_blueprint(webteam, url_prefix="/team")
 app.register_blueprint(releases, url_prefix="/releases")
 app.register_blueprint(canonicool, url_prefix="/canonicool")
-discourse_docs.init_app(app)
+init_docs(app)
+init_sso(app)
