@@ -5,7 +5,7 @@
 {% block content %}
     <div class="p-strip is-shallow is-bordered">
       <div class="row" style="overflow: auto">
-        <table class="p-table--sortable" role="grid">
+        <table role="grid">
           <thead>
             <tr>
               <th width="200" role="columnheader" id="t-domain" aria-sort="none">Staging domain</th>
@@ -28,7 +28,7 @@
             <td class="pr-author">...</td>
             <td class="human-time">...</td>
             <td class="release">
-              <a class="p-button--neutral" style="width: 100%"
+              <a class="p-button" style="width: 100%"
               href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2Flimenet.snapcraft.io-staging%2Fbuild"
               >
               Deploy to staging
@@ -66,11 +66,11 @@
 
         if (release) {
           if (stagingCommitID !== productionCommitID) {
-            release.innerHTML = `<a style="width: 100%" class="p-button--neutral" href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2F${domainJson['production']['domain']}-production%2Fparambuild%2F%3Fimage_tag%3D${domainJson['staging']['imageTag']}">` +
+            release.innerHTML = `<a style="width: 100%" class="p-button" href="https://jenkins.canonical.com/webteam/securityRealm/commenceLogin?from=%2Fwebteam%2Fjob%2F${domainJson['production']['domain']}-production%2Fparambuild%2F%3Fimage_tag%3D${domainJson['staging']['imageTag']}">` +
               `  Release 🚀` +
               `</a>`;
             } else {
-              release.innerHTML = '<button style="width: 100%" class="p-button--neutral" disabled="true">Up to date 👍</button>';
+              release.innerHTML = '<button style="width: 100%" class="p-button" disabled="true">Up to date 👍</button>';
             }
           }
         }
