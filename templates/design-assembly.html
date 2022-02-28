@@ -14,14 +14,32 @@
       <p>Everyone is welcome to attend.</p>
     </div>
   </div>
-</div>
+</section>
 
 <section class="p-strip">
   <div class="row">
+    <div class="u-fixed-width">
+      <hr>
+    </div>
+
     <div class="col-6">
       <h2 class="p-muted-heading">Next session</h2>
       <p>{{ future_events[0].human_date }}</p>
       <p>Moderator: <a href="{{ future_events[0].moderator_profile_link }}">{{ future_events[0].moderator }}</a></p>
+      <p>Topic: <a href="{{ future_events[0].topic_provider_links[0] }}">{{ future_events[0].topic_providers[0] }}</a></p>
+    </div>
+    <div class="col-6">
+      <h2 class="p-muted-heading">Upcoming sessions</h2>
+
+      <div class="row">
+        {% for i in range(1, 4) %}
+          <div class="col-2">
+            <p>{{ future_events[i].human_date }}</p>
+            <p>Moderator: <a href="{{ future_events[i].moderator_profile_link }}">{{ future_events[i].moderator }}</a></p>
+            <p>Topic: <a href="{{ future_events[i].topic_provider_links[0] }}">{{ future_events[i].topic_providers[0] }}</a></p>
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </section>
@@ -29,12 +47,16 @@
 {% for event in past_events %}
   <section class="p-strip">
     <div class="row">
+      <div class="u-fixed-width">
+        <hr>
+      </div>
+
       <div class="col-6">
         <iframe src="{{ event.video }}" width="640" height="360" allow="autoplay"></iframe>
 
         <p>{{ event.human_date }}</p>
         <p>Moderator: <a href="{{ event.moderator_profile_link }}">{{ event.moderator }}</a></p>
-
+        
         <p>Topic(s):</p>
         
         {% for topic_provider in event.topic_providers %}
@@ -43,6 +65,7 @@
       </div>
 
       <div class="col-6">
+        <h2 class="p-muted-heading">Agenda</h2>
         <p>{{ event.description | safe }}</p>
       </div>
     </div>
