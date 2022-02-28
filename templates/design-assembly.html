@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="p-strip">
+  <div class="row">
+    <div class="col-6">
+      <h1>Design assembly</h1>
+    </div>
+
+    <div class="col-6">
+      <p>A meeting dedicated to the whole design team: share topics and discoveries, ask for help and feedback, work together and show & tell.</p>
+
+      <p>Everyone is welcome to attend.</p>
+    </div>
+  </div>
+</div>
+
+<section class="p-strip">
+  <div class="row">
+    <div class="col-6">
+      <h2 class="p-muted-heading">Next session</h2>
+      <p>{{ future_events[0].human_date }}</p>
+      <p>Moderator: <a href="{{ future_events[0].moderator_profile_link }}">{{ future_events[0].moderator }}</a></p>
+    </div>
+  </div>
+</section>
+
+{% for event in past_events %}
+  <section class="p-strip">
+    <div class="row">
+      <div class="col-6">
+        <iframe src="{{ event.video }}" width="640" height="360" allow="autoplay"></iframe>
+
+        <p>{{ event.human_date }}</p>
+        <p>Moderator: <a href="{{ event.moderator_profile_link }}">{{ event.moderator }}</a></p>
+
+        <p>Topic(s):</p>
+        
+        {% for topic_provider in event.topic_providers %}
+          <p><a href="{{ event.topic_provider_links[loop.index0] }}">{{ topic_provider }}</a></p>
+        {% endfor %}
+      </div>
+
+      <div class="col-6">
+        <p>{{ event.description | safe }}</p>
+      </div>
+    </div>
+  </section>
+{% endfor %}
+
+{% endblock %}
