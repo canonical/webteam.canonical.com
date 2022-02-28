@@ -8,7 +8,7 @@ from flask import Blueprint, render_template, request
 
 DEPLOYMENT_ID = os.getenv(
     "DEPLOYMENT_ID",
-    "AKfycbzcp6ipwy0WKmoZpOcQjnsIAWlZzSOrR2b92lqBLoyjxjNMnqUDCFf_IQlfEfI5GS5nkA",
+    "AKfycbyMHB6E0ErhpuO2Om1UsZ6gveh3oADt0gjp_IJoFUqoEUYCtS0sJ4mRnlfYNQ26ynG4PA",
 )
 DESIGN_ASSEMBLY_SHEET_URL = (
     f"https://script.google.com/macros/s/{DEPLOYMENT_ID}/exec"
@@ -43,7 +43,7 @@ def index():
         # correct date
         corrected_datetime = parser.parse(event["date"]) + hour
         event_date = corrected_datetime.date()
-        event["human_date"] = event_date.strftime("%m/%d/%Y")
+        event["human_date"] = event_date.strftime("%d/%m/%Y")
 
         if today > event_date:
             past_events.insert(0, event)
