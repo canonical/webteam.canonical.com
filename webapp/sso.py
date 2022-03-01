@@ -51,9 +51,10 @@ def init_sso(app):
     def before_request():
         if flask.request.path in ["/login", "/logout"]:
             return
-        if flask.request.path.startswith("/guides"):
-            if "openid" not in flask.session:
-                return flask.redirect("/login?next=" + flask.request.path)
+        if "openid" not in flask.session and flask.request.path.startswith(
+            ("/guides", "/practices")
+        ):
+            return flask.redirect("/login?next=" + flask.request.path)
 
     @app.after_request
     def add_headers(response):

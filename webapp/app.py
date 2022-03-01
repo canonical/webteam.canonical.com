@@ -1,11 +1,12 @@
 import flask
 from canonicalwebteam.flask_base.app import FlaskBase
 
-from webapp.guides import init_docs
+from webapp.canonicool import canonicool
+from webapp.guides import bootstrap_guides
+from webapp.practices import bootstrap_practices
+from webapp.releases import releases
 from webapp.sso import init_sso
 from webapp.team import webteam
-from webapp.releases import releases
-from webapp.canonicool import canonicool
 
 app = FlaskBase(
     __name__,
@@ -23,5 +24,6 @@ def index():
 app.register_blueprint(webteam, url_prefix="/team")
 app.register_blueprint(releases, url_prefix="/releases")
 app.register_blueprint(canonicool, url_prefix="/canonicool")
-init_docs(app)
+bootstrap_guides(app)
+bootstrap_practices(app)
 init_sso(app)
