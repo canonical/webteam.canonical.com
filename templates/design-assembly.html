@@ -2,7 +2,6 @@
 
 {% block content %}
 
-{% if page == 1 %}
 <section class="p-strip">
   <div class="row">
     <div class="col-6">
@@ -17,36 +16,37 @@
   </div>
 </section>
 
-<section class="p-strip">
-  <div class="row">
-    <div class="u-fixed-width">
-      <hr>
-    </div>
+{% if page == 1 %}
+  <section class="p-strip">
+    <div class="row">
+      <div class="u-fixed-width">
+        <hr>
+      </div>
 
-    <div class="col-6">
-      <h2 class="p-muted-heading">Next session</h2>
-      <p>{{ future_events[0].human_date }}</p>
-      <p>Moderator: <a href="{{ future_events[0].moderator_profile_link }}">{{ future_events[0].moderator }}</a></p>
-      <p>Topic: <a href="{{ future_events[0].topic_provider_links[0] }}">{{ future_events[0].topic_providers[0] }}</a></p>
-    </div>
+      <div class="col-6">
+        <h2 class="p-muted-heading">Next session</h2>
+        <p>{{ future_events[0].human_date }}</p>
+        <p>Moderator: <a href="{{ future_events[0].moderator_profile_link }}">{{ future_events[0].moderator }}</a></p>
+        <p>Topic: <a href="{{ future_events[0].topic_provider_links[0] }}">{{ future_events[0].topic_providers[0] }}</a></p>
+      </div>
 
-    <div class="col-6">
-      <h2 class="p-muted-heading">Upcoming sessions</h2>
+      <div class="col-6">
+        <h2 class="p-muted-heading">Upcoming sessions</h2>
 
-      <div class="row">
-        {% for i in range(1, 4) %}
-          {% if future_events[i] %}
-            <div class="col-2">
-              <p>{{ future_events[i].human_date }}</p>
-              <p>Moderator: <a href="{{ future_events[i].moderator_profile_link }}">{{ future_events[i].moderator }}</a></p>
-              <p>Topic: <a href="{{ future_events[i].topic_provider_links[0] }}">{{ future_events[i].topic_providers[0] }}</a></p>
-            </div>
-          {% endif %}
-        {% endfor %}
+        <div class="row">
+          {% for i in range(1, 4) %}
+            {% if future_events[i] %}
+              <div class="col-2">
+                <p>{{ future_events[i].human_date }}</p>
+                <p>Moderator: <a href="{{ future_events[i].moderator_profile_link }}">{{ future_events[i].moderator }}</a></p>
+                <p>Topic: <a href="{{ future_events[i].topic_provider_links[0] }}">{{ future_events[i].topic_providers[0] }}</a></p>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 {% endif %}
 
 {% for event in past_events %}
@@ -78,5 +78,7 @@
     </section>
   {% endif %}
 {% endfor %}
+
+{% include "shared/_pagination.html" %}
 
 {% endblock %}
