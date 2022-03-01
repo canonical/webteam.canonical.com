@@ -11,8 +11,8 @@ from webapp.sso import login_required
 DEPLOYMENT_ID = os.getenv(
     "DEPLOYMENT_ID",
     (
-        "AKfycbyMHB6E0ErhpuO2Om1UsZ6gveh3oADt0gjp_"
-        "IJoFUqoEUYCtS0sJ4mRnlfYNQ26ynG4PA"
+        "AKfycbzCwEE2_l7oUdsU3BJON99KHtDL0o"
+        "fLVIhhjsNThscoP_m52MpkumwLrk00dPaHajopDA"
     ),
 )
 DESIGN_ASSEMBLY_SHEET_URL = (
