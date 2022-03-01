@@ -6,6 +6,8 @@ from datetime import datetime, timedelta
 from dateutil import parser
 from flask import Blueprint, render_template, request
 
+from webapp.sso import login_required
+
 DEPLOYMENT_ID = os.getenv(
     "DEPLOYMENT_ID",
     (
@@ -30,6 +32,7 @@ def hash_email(email):
 
 
 @design_assembly.route("/")
+@login_required
 def index():
     page = request.args.get("page", default=1, type=int)
     response = requests.get(DESIGN_ASSEMBLY_SHEET_URL)

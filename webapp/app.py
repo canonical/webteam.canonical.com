@@ -21,9 +21,9 @@ def index():
     return flask.render_template("homepage.html")
 
 
+init_sso(app)
+init_docs(app)
 app.register_blueprint(webteam, url_prefix="/team")
 app.register_blueprint(releases, url_prefix="/releases")
 app.register_blueprint(canonicool, url_prefix="/canonicool")
 app.register_blueprint(design_assembly, url_prefix="/design-assembly")
-init_docs(app)
-init_sso(app)
