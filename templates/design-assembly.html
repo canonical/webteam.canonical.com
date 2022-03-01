@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{% if page == 1 %}
 <section class="p-strip">
   <div class="row">
     <div class="col-6">
@@ -43,33 +44,36 @@
     </div>
   </div>
 </section>
+{% endif %}
 
 {% for event in past_events %}
-  <section class="p-strip">
-    <div class="row">
-      <div class="u-fixed-width">
-        <hr>
-      </div>
+  {% if loop.index >= events_per_page * page - events_per_page + 1 and loop.index <= (page * events_per_page) %}
+    <section class="p-strip">
+      <div class="row">
+        <div class="u-fixed-width">
+          <hr>
+        </div>
 
-      <div class="col-6">
-        <iframe src="{{ event.video }}" width="640" height="360" allow="autoplay"></iframe>
+        <div class="col-6">
+          <iframe src="{{ event.video }}" width="640" height="360" allow="autoplay"></iframe>
 
-        <p>{{ event.human_date }}</p>
-        <p>Moderator: <a href="{{ event.moderator_profile_link }}">{{ event.moderator }}</a></p>
-        
-        <p>Topic(s):</p>
-        
-        {% for topic_provider in event.topic_providers %}
-          <p><a href="{{ event.topic_provider_links[loop.index0] }}">{{ topic_provider }}</a></p>
-        {% endfor %}
-      </div>
+          <p>{{ event.human_date }}</p>
+          <p>Moderator: <a href="{{ event.moderator_profile_link }}">{{ event.moderator }}</a></p>
+          
+          <p>Topic(s):</p>
+          
+          {% for topic_provider in event.topic_providers %}
+            <p><a href="{{ event.topic_provider_links[loop.index0] }}">{{ topic_provider }}</a></p>
+          {% endfor %}
+        </div>
 
-      <div class="col-6">
-        <h2 class="p-muted-heading">Agenda</h2>
-        <p>{{ event.description | safe }}</p>
+        <div class="col-6">
+          <h2 class="p-muted-heading">Agenda</h2>
+          <p>{{ event.description | safe }}</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  {% endif %}
 {% endfor %}
 
 {% endblock %}

@@ -50,7 +50,7 @@ def index():
         elif today <= event_date:
             future_events.append(event)
 
-    events_per_page = 6
+    events_per_page = 3
     return render_template(
         "design-assembly.html",
         past_events=past_events,
