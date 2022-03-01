@@ -8,7 +8,10 @@ from flask import Blueprint, render_template, request
 
 DEPLOYMENT_ID = os.getenv(
     "DEPLOYMENT_ID",
-    "AKfycbyMHB6E0ErhpuO2Om1UsZ6gveh3oADt0gjp_IJoFUqoEUYCtS0sJ4mRnlfYNQ26ynG4PA",
+    (
+        "AKfycbyMHB6E0ErhpuO2Om1UsZ6gveh3oADt0gjp_"
+        "IJoFUqoEUYCtS0sJ4mRnlfYNQ26ynG4PA"
+    ),
 )
 DESIGN_ASSEMBLY_SHEET_URL = (
     f"https://script.google.com/macros/s/{DEPLOYMENT_ID}/exec"
