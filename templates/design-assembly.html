@@ -26,8 +26,8 @@
       <div class="col-6">
         <h2 class="p-muted-heading">Next session</h2>
         <p>{{ future_events[0].human_date }}</p>
-        <p>Moderator: <a href="{{ future_events[0].moderator_profile_link }}">{{ future_events[0].moderator }}</a></p>
-        <p>Topic: <a href="{{ future_events[0].topic_provider_links[0] }}">{{ future_events[0].topic_providers[0] }}</a></p>
+        <p>Moderator:<br /><a href="{{ future_events[0].moderator_profile_link }}">{{ future_events[0].moderator }}</a></p>
+        <p>Topic:<br /><a href="{{ future_events[0].topic_provider_links[0] }}">{{ future_events[0].topic_providers[0] }}</a></p>
       </div>
 
       <div class="col-6">
@@ -38,8 +38,8 @@
             {% if future_events[i] %}
               <div class="col-2">
                 <p>{{ future_events[i].human_date }}</p>
-                <p>Moderator: <a href="{{ future_events[i].moderator_profile_link }}">{{ future_events[i].moderator }}</a></p>
-                <p>Topic: <a href="{{ future_events[i].topic_provider_links[0] }}">{{ future_events[i].topic_providers[0] }}</a></p>
+                <p>Moderator:<br /><a href="{{ future_events[i].moderator_profile_link }}">{{ future_events[i].moderator }}</a></p>
+                <p>Topic:<br /><a href="{{ future_events[i].topic_provider_links[0] }}">{{ future_events[i].topic_providers[0] }}</a></p>
               </div>
             {% endif %}
           {% endfor %}
@@ -58,16 +58,17 @@
         </div>
 
         <div class="col-6">
-          <iframe src="{{ event.video }}" width="640" height="360" allow="autoplay"></iframe>
+          <iframe src="{{ event.video }}" width="640" height="360" allow="autoplay" style="margin-top: 5px;"></iframe>
 
           <p>{{ event.human_date }}</p>
-          <p>Moderator: <a href="{{ event.moderator_profile_link }}">{{ event.moderator }}</a></p>
+          <p>Moderator:<br /><a href="{{ event.moderator_profile_link }}">{{ event.moderator }}</a></p>
           
-          <p>Topic(s):</p>
+          <p>Topic:<br />
           
           {% for topic_provider in event.topic_providers %}
-            <p><a href="{{ event.topic_provider_links[loop.index0] }}">{{ topic_provider }}</a></p>
+            <a href="{{ event.topic_provider_links[loop.index0] }}">{{ topic_provider }}</a><br />
           {% endfor %}
+          </p>
         </div>
 
         <div class="col-6">
