@@ -16,6 +16,15 @@ def get_all_display_names():
     return [person.display_name for person in team.members]
 
 
+def get_all_mattermost_handles():
+    lp = Launchpad.login_anonymously(
+        "webteam.canonical.com", "production", ".", version="devel"
+    )
+    team = lp.people["canonical-webmonkeys"]
+
+    return [person.name for person in team.members]
+
+
 @webteam.route("/")
 def index():
     display_names = get_all_display_names()
@@ -41,6 +50,21 @@ def random():
         return jsonify(display_names)
     else:
         return render_template("team/random.html", **context)
+
+
+@webteam.route("/mattermost")
+def mattermost():
+    mattermost_handles = get_all_mattermost_handles()
+    mattermost_handles.sort()
+
+    if request.headers.get(
+        "Content-Type"
+    ) and "application/json" in request.headers.get("Content-Type"):
+        return jsonify(mattermost_handles)
+    else:
+        return render_template(
+            "team/mattermost.html", mattermost_handles=mattermost_handles
+        )
 
 
 @webteam.after_request
