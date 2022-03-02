@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% block title %}List of awesome people{% endblock %}
+{% block description %}{% endblock %} {% block content %}
+<section class="p-strip">
+  <div class="row">
+    <div class="col-12">
+      <h1>Awesome handles of the webteam!</h1>
+      <p>Total: <strong>{{ mattermost_handles|length }}</strong></p>
+      <ul>
+        {% for handle in mattermost_handles %}
+        <li>{{ handle }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+{% endblock content %}
