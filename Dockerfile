@@ -27,7 +27,7 @@ RUN yarn run build-css
 FROM ubuntu:focal
 
 # Install python and import python dependencies
-RUN apt-get update && apt-get install --no-install-recommends --yes python3 python3-setuptools
+RUN apt-get update && apt-get install --no-install-recommends --yes python3 python3-setuptools ca-certificates libsodium-dev
 COPY --from=python-dependencies /root/.local/lib/python3.8/site-packages /root/.local/lib/python3.8/site-packages
 COPY --from=python-dependencies /root/.local/bin /root/.local/bin
 WORKDIR /srv
