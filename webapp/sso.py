@@ -1,11 +1,10 @@
-import os
 import flask
 import socket
 from django_openid_auth.teams import TeamsRequest, TeamsResponse
 from flask_openid import OpenID
 
 SSO_LOGIN_URL = "https://login.ubuntu.com"
-SSO_TEAM = os.getenv("OPENID_LAUNCHPAD_TEAM", "canonical")
+SSO_TEAM = "canonical-webmonkeys"
 
 
 def init_sso(app):
@@ -51,9 +50,10 @@ def init_sso(app):
     def before_request():
         if flask.request.path in ["/login", "/logout"]:
             return
-        if flask.request.path.startswith("/guides"):
-            if "openid" not in flask.session:
-                return flask.redirect("/login?next=" + flask.request.path)
+        if "openid" not in flask.session and flask.request.path.startswith(
+            ("/guides", "/practices")
+        ):
+            return flask.redirect("/login?next=" + flask.request.path)
 
     @app.after_request
     def add_headers(response):
