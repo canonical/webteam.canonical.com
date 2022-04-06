@@ -32,7 +32,6 @@ def hash_email(email):
 
 
 @design_assembly.route("/")
-# @login_required
 def index():
     page = request.args.get("page", default=1, type=int)
     response = requests.get(DESIGN_ASSEMBLY_SHEET_URL)
