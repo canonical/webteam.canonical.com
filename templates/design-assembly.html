@@ -74,7 +74,9 @@
         </div>
 
         <div class="col-6">
+          {% if event.video %}
           <iframe src="{{ event.video }}" width="640" height="360" allow="autoplay" style="margin: .5rem 0"></iframe>
+          {% endif %}
           <p class="is-muted u-no-margin--bottom p-heading--5">{{ event.human_date }}</p>
           <div class="row">
             <div class="col-2">
