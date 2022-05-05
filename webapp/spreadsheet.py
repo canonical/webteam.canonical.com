@@ -39,7 +39,7 @@ class DiscoveryCache:
 
 
 def get_sheet():
-    if PRIVATE_KEY_ID == None:
+    if PRIVATE_KEY_ID is None:
         return None
 
     service_account_info = {
