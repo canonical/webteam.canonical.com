@@ -54,6 +54,9 @@ def get_id(video_link):
 
 @masterclasses.route("/")
 def index():
+    if sheet is None:
+        return render_template("masterclasses.html", sessions=[])
+
     SHEET = "Completed"
     RANGE = "A2:G1000"
     COLUMNS = [

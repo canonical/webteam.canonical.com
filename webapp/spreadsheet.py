@@ -39,6 +39,9 @@ class DiscoveryCache:
 
 
 def get_sheet():
+    if PRIVATE_KEY_ID == None:
+        return None
+
     service_account_info = {
         "type": "service_account",
         "project_id": "roadmap-270011",
