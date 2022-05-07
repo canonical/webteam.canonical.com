@@ -21,6 +21,16 @@ env:
       key: discourse-api-username
       name: canonical-discourse
 
+  - name: PRIVATE_KEY_ID
+    secretKeyRef:
+      key: private-key-id
+      name: specs-canonical-com
+
+  - name: PRIVATE_KEY
+    secretKeyRef:
+      key: private-key
+      name: specs-canonical-com
+
 memoryLimit: 128Mi
 
 # Overrides for production

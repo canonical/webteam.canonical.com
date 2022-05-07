@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="p-strip--suru">
+  <div class="u-fixed-width">
+    <h1>Masterclasses</h1>
+  </div>
+</section>
+
+<section class="p-strip">
+  <div class="row u-equal-height">
+    {% for session in sessions %}
+      {% if loop.index % 3 == 0 %}
+        {% with session=session %}
+          {% include "shared/_card--masterclass.html" %}
+        {% endwith %}
+        </div>
+        <div class="row u-equal-height">
+      {% else %}
+        {% with session=session %}
+          {% include "shared/_card--masterclass.html" %}
+        {% endwith %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% include "shared/_pagination.html" %}
+
+{% endblock %}
