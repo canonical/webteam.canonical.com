@@ -18,9 +18,14 @@ def get_value_row(row, type):
     if row:
         if type == datetime:
             if "formattedValue" in row:
-                return datetime.strptime(
-                    row["formattedValue"], "%d %B %Y"
-                ).strftime("%d %b %Y")
+                return {
+                    "Formatted": datetime.strptime(
+                        row["formattedValue"], "%d %B %Y"
+                    ).strftime("%d %b %Y"),
+                    "Object": datetime.strptime(
+                        row["formattedValue"], "%d %B %Y"
+                    ),
+                }
         elif "userEnteredValue" in row:
             if "stringValue" in row["userEnteredValue"]:
                 if "link" in row["userEnteredFormat"]["textFormat"]:
@@ -90,5 +95,8 @@ def index():
                     session["Link"] = get_id(session[column])
 
             sessions.append(session)
+
+    # Sort sessions by date
+    sessions.sort(key=lambda x: x["Date"]["Object"], reverse=True)
 
     return render_template("masterclasses.html", sessions=sessions)
