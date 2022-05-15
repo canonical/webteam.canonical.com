@@ -1,11 +1,11 @@
-<div class="p-card u-no-padding col-4">
+<div class="p-card u-no-padding col-3">
   {% if session.Link %}
   <a href="{{ session.Recording }}" aria-hidden="true" tabindex="-1">
     <img class="p-card__image" alt="{{ session.Topic }} video" src="https://lh3.google.com/u/0/d/{{ session.Link }}=k">
   </a>
   <div class="p-card__inner">
-    <h3><a href="{{ session.Recording }}">{{ session.Topic }}</a></h3>
-    <p class="u-text--muted">Duration: {{ session.Duration }}</p>
+    <h5 class="u-no-margin--bottom"><a href="{{ session.Recording }}">{{ session.Topic }}</a></h5>
+    <p class="u-text--muted u-no-margin--bottom">Duration: {{ session.Duration }}</p>
     <p>{{ session.Description }}</p>
   </div>
   <hr class="u-no-margin--bottom">
@@ -14,7 +14,7 @@
   </div>
   {% else %}
   <div class="p-card__inner">
-    <h3>{{ session.Topic }}</h3>
+    <h5 class="u-no-margin--bottom">{{ session.Topic }}</h5>
     <p>{{ session.Description }}</p>
     <p>Sorry we forgot to record this session.</p>
   </div>
