@@ -75,7 +75,7 @@
   <div class="row">
     <div class="col-8">
       <h3 class="p-muted-heading u-sv2">Something missing?</h3>
-      <p class="p-heading--3">If you would like to see a topic covered but you don't have the knowledge. <br />Submit an idea to the team.</p>
+      <p class="p-heading--3">If you would like to see a topic covered but you don't have the knowledge, submit an idea to the team.</p>
       <p>
         <a href="https://docs.google.com/spreadsheets/d/1fFumFWIM3oHwLr9pcBlaANcadAU0bNJxbkfGKwC_1pg/edit#gid=236955420" class="p-button u-no-margin--bottom">
           Register an idea
@@ -84,6 +84,16 @@
     </div>
   </div>
 </section>
+
+<script>
+  let images = document.querySelectorAll('.p-card__image');
+  images.forEach(function(image) {
+    image.onerror = function(e) {
+      image.src = 'https://assets.ubuntu.com/v1/36f1139e-Design-and-Web-Team-Blog.jpg';
+    }
+  });
+</script>
+
 
 {% include "shared/_pagination.html" %}
 

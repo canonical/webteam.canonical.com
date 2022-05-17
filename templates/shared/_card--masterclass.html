@@ -4,7 +4,7 @@
     <img class="p-card__image" alt="{{ session.Topic }} video" src="https://lh3.google.com/u/0/d/{{ session.Link }}=k">
   </a>
   <div class="p-card__inner">
-    <h5 class="u-no-margin--bottom"><a href="{{ session.Recording }}">{{ session.Topic }}</a></h5>
+    <h3 class="p-heading--5 u-no-margin--bottom"><a href="{{ session.Recording }}">{{ session.Topic }}</a></h3>
     <p class="u-text--muted u-no-margin--bottom">Duration: {{ session.Duration }}</p>
     <p>{{ session.Description }}</p>
   </div>
@@ -14,7 +14,7 @@
   </div>
   {% else %}
   <div class="p-card__inner">
-    <h5 class="u-no-margin--bottom">{{ session.Topic }}</h5>
+    <h3 class="p-heading--5 u-no-margin--bottom">{{ session.Topic }}</h3>
     <p>{{ session.Description }}</p>
     <p>Sorry we forgot to record this session.</p>
   </div>
