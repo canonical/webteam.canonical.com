@@ -10,7 +10,7 @@
   </div>
   <hr class="u-no-margin--bottom">
   <div class="p-card__inner">
-    by {{ session.Owner }} on {{ session.Date }}
+    by {{ session.Owner }} on {{ session.Date.Formatted }}
   </div>
   {% else %}
   <div class="p-card__inner">
@@ -20,7 +20,7 @@
   </div>
   <hr class="u-no-margin--bottom">
   <div class="p-card__inner">
-    by {{ session.Owner }} on {{ session.Date }}
+    by {{ session.Owner }} on {{ session.Date.Formatted }}
   </div>
   {% endif %}
 </div>
