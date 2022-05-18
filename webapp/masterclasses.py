@@ -23,7 +23,11 @@ def get_value_row(row, type):
                 ).strftime("%d %b %Y")
         elif "userEnteredValue" in row:
             if "stringValue" in row["userEnteredValue"]:
-                if "link" in row["userEnteredFormat"]["textFormat"]:
+                if (
+                    "userEnteredFormat" in row
+                    and "textFormat" in row["userEnteredFormat"]
+                    and "link" in row["userEnteredFormat"]["textFormat"]
+                ):
                     return row["userEnteredFormat"]["textFormat"]["link"][
                         "uri"
                     ]
@@ -54,8 +58,59 @@ def get_id(video_link):
 
 @masterclasses.route("/")
 def index():
+    previous_sessions = get_previous_sessions()
+    upcoming_sessions = get_upcoming_sessions()
+
+    return render_template(
+        "masterclasses.html",
+        previous_sessions=previous_sessions,
+        upcoming_sessions=upcoming_sessions,
+    )
+
+
+def get_upcoming_sessions():
     if sheet is None:
-        return render_template("masterclasses.html", sessions=[])
+        return []
+
+    SHEET = "Upcoming"
+    RANGE = "A2:E1000"
+    COLUMNS = [
+        ("Topic", str),
+        ("Owner", str),
+        ("Duration", str),
+        ("Date", datetime),
+        ("Notes", str),
+        ("Event", str),
+    ]
+    res = sheet.get(
+        spreadsheetId=SPREADSHEET_ID,
+        ranges=[f"{SHEET}!{RANGE}"],
+        includeGridData=True,
+    ).execute()
+
+    sessions = []
+    for row in res["sheets"][0]["data"][0]["rowData"]:
+        if "values" in row and row["values"][0]:
+            session = {}
+            for column_index in range(len(COLUMNS)):
+                (column, type) = COLUMNS[column_index]
+                session[column] = get_value_row(
+                    row["values"][column_index]
+                    if index_in_list(row["values"], column_index)
+                    else None,
+                    type,
+                )
+                if COLUMNS[column_index][0] == "Recording":
+                    session["Link"] = get_id(session[column])
+
+            sessions.append(session)
+
+    return sessions
+
+
+def get_previous_sessions():
+    if sheet is None:
+        return []
 
     SHEET = "Completed"
     RANGE = "A2:G1000"
@@ -91,4 +146,4 @@ def index():
 
             sessions.append(session)
 
-    return render_template("masterclasses.html", sessions=sessions)
+    return sessions
