@@ -110,9 +110,6 @@ def get_upcoming_sessions():
 
             sessions.append(session)
 
-    # Sort sessions by date
-    sessions.sort(key=lambda x: x["Date"]["Object"], reverse=True)
-
     return sessions
 
 
@@ -153,5 +150,8 @@ def get_previous_sessions():
                     session["Link"] = get_id(session[column])
 
             sessions.append(session)
+
+    # Sort sessions by date
+    sessions.sort(key=lambda x: x["Date"]["Object"], reverse=True)
 
     return sessions
