@@ -1,12 +1,11 @@
 from datetime import datetime
-from flask import Blueprint, render_template
-from webapp.spreadsheet import get_sheet
+import flask
+from webapp.spreadsheet import get_sheet, MissingCredential
 
 
 SPREADSHEET_ID = "1fFumFWIM3oHwLr9pcBlaANcadAU0bNJxbkfGKwC_1pg"
-sheet = get_sheet()
 
-masterclasses = Blueprint(
+masterclasses = flask.Blueprint(
     "masterclasses",
     __name__,
     template_folder="/templates",
@@ -66,7 +65,7 @@ def index():
     previous_sessions = get_previous_sessions()
     upcoming_sessions = get_upcoming_sessions()
 
-    return render_template(
+    return flask.render_template(
         "masterclasses.html",
         previous_sessions=previous_sessions,
         upcoming_sessions=upcoming_sessions,
@@ -74,8 +73,10 @@ def index():
 
 
 def get_upcoming_sessions():
-    if sheet is None:
-        return []
+    try:
+        sheet = get_sheet()
+    except MissingCredential as error:
+        flask.abort(500, str(error))
 
     SHEET = "Upcoming"
     RANGE = "A2:E1000"
@@ -114,8 +115,10 @@ def get_upcoming_sessions():
 
 
 def get_previous_sessions():
-    if sheet is None:
-        return []
+    try:
+        sheet = get_sheet()
+    except MissingCredential as error:
+        flask.abort(500, str(error))
 
     SHEET = "Completed"
     RANGE = "A2:G1000"
