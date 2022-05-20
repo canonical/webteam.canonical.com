@@ -33,7 +33,7 @@
                 <ul class="p-media-object__meta-list">
                   {% if session.Date %}
                   <li class="p-media-object__meta-list-item--date">
-                    <span class="u-off-screen">Date: </span>{{ session.Date }}
+                    <span class="u-off-screen">Date: </span>{{ session.Date.Formatted }}
                   </li>
                   <li class="p-media-object__meta-list-item--location">
                     <span class="u-off-screen">Location: </span><a href="{{session.Event}}">Google Meet</a>
