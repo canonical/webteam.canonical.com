@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="p-strip--image p-strip--light" style="background-image: url('https://assets.ubuntu.com/v1/06a0285e-image-background-paper.png');">
+    <div class="row">
+      <div class="col-9">
+        <h1>Web &amp; design team portal</h1>
+        <br />
+        <h4>500 error: {{ message or "Something went wrong" }}</h4>
+      </div>
+      <div class="col-3">
+        <p><img style="height: 200px" src="https://assets.ubuntu.com/v1/34d30e91-boom-4680150_960_720.png" alt="Boom: 500 server error" /></p>
+      </div>
+    </div>
+  </div>
+  <div class="p-strip--image">
+    <div class="row">
+      <div class="col-6">
+      </div>
+    </div>
+  </div>
+{% endblock content %}

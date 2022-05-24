@@ -11,6 +11,10 @@ PRIVATE_KEY_ID = os.getenv("PRIVATE_KEY_ID")
 PRIVATE_KEY = os.getenv("PRIVATE_KEY")
 
 
+class MissingCredential(Exception):
+    pass
+
+
 class DiscoveryCache:
     """
     Unix file-based cache for use with the API Discovery service
@@ -39,8 +43,11 @@ class DiscoveryCache:
 
 
 def get_sheet():
-    if PRIVATE_KEY_ID is None:
-        return None
+    if not PRIVATE_KEY_ID:
+        raise MissingCredential("PRIVATE_KEY_ID is missing")
+
+    if not PRIVATE_KEY:
+        raise MissingCredential("PRIVATE_KEY is missing")
 
     service_account_info = {
         "type": "service_account",
