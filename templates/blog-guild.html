@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="p-strip--suru">
+  <div class="row">
+    <div class="col-6">
+      <h1>{% block title %}Blog guild{% endblock %}</h1>
+      <p>A place where people can share ideas and tips, or ask for advice on writing.</p>
+    </div>
+  </div>
+</section>
+
+<section class="p-strip is-bordered">
+  <div class="row">
+    <div class="p-divider u-no-margin--bottom">
+        <h2 class="u-sv3">Our blogs</h2>
+        <div class="row">
+          {% for blog in blogs %}
+          <div class="col-4 p-card">
+            <div class="p-media-object--small">
+              <div class="p-media-object__details">
+                <h3 class="p-media-object__title">
+                  {{ blog.Owner }}
+                </h3>
+                <p class="u-no-margin--bottom"><a href="{{blog.URL}}">{{blog.URL}}</a></p>
+                <p class="p-media-object__content p-muted-heading u-no-margin--bottom">Goals</p>
+                <p class="p-media-object__content">{{blog.Goals}}</p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="p-strip--light is-shallow is-bordered">
+  <div class="row">
+    <div class="col-8">
+      <h3 class="p-muted-heading u-sv2">Join the Blog Guild</h3>
+      <p class="p-heading--3">Join us on our Mattermost channel</p>
+      <p>
+        <a href="https://chat.canonical.com/canonical/channels/blog-guild-web--design" class="p-button u-no-margin--bottom">
+          Blog Guild Mattermost channel
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
+
+{% include "shared/_pagination.html" %}
+
+{% endblock %}
