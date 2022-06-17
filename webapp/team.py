@@ -16,6 +16,19 @@ def get_all_display_names():
     return [person.display_name for person in team.members]
 
 
+def get_all_teams():
+    return [
+        "User research",
+        "Web",
+        "Workplace Engineering",
+        "Apps:  MAAS,  JAAS",
+        "Marketplaces",
+        "Design tribe:  Vanilla,  Brand,  Desktop & installers",
+        "Commercial: Shop, CUBE",
+        "Landscape",
+    ]
+
+
 def get_all_mattermost_handles():
     lp = Launchpad.login_anonymously(
         "webteam.canonical.com", "production", ".", version="devel"
@@ -41,13 +54,17 @@ def index():
 @webteam.route("/random")
 def random():
     display_names = get_all_display_names()
+    team_names = get_all_teams()
 
-    context = {"user": rnd.choice(display_names)}
+    context = {
+        "user": rnd.choice(display_names),
+        "teams": rnd.sample(team_names, len(team_names)),
+    }
 
     if request.headers.get(
         "Content-Type"
     ) and "application/json" in request.headers.get("Content-Type"):
-        return jsonify(display_names)
+        return jsonify(context)
     else:
         return render_template("team/random.html", **context)
 
