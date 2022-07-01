@@ -19,12 +19,12 @@ def get_all_display_names():
 def get_all_teams():
     return [
         "User research",
-        "Web",
+        "Sites",
         "Workplace Engineering",
-        "Apps:  MAAS,  JAAS",
+        "MAAS",
         "Marketplaces",
-        "Design tribe:  Vanilla,  Brand,  Desktop & installers",
-        "Commercial: Shop, CUBE",
+        "Design system",
+        "Commercial",
         "Landscape",
     ]
 
