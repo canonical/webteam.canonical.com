@@ -1,10 +1,11 @@
+import os
 import flask
 import socket
 from django_openid_auth.teams import TeamsRequest, TeamsResponse
 from flask_openid import OpenID
 
 SSO_LOGIN_URL = "https://login.ubuntu.com"
-SSO_TEAM = "canonical"
+SSO_TEAM = os.getenv("OPENID_LAUNCHPAD_TEAM", "canonical")
 
 
 def init_sso(app):
