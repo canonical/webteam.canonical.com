@@ -11,7 +11,7 @@
         {% if element.is_active %}aria-current="page"{% endif %}
       >{{ element.navlink_text }}</a>
       {% else %}
-        <span class="p-side-navigation__text">{{ element.navlink_text }}</span>
+        <strong class="p-side-navigation__text">{{ element.navlink_text }}</strong>
       {% endif %}
 
       {% if expandable %}
