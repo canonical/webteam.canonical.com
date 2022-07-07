@@ -2,7 +2,7 @@ domain: webteam.canonical.com
 
 image: prod-comms.docker-registry.canonical.com/webteam.canonical.com
 
-env: &env
+env:
   - name: SENTRY_DSN
     value: https://ac1f05d48419453ab98e9af52d0da6ae@sentry.is.canonical.com//35
 
@@ -50,34 +50,6 @@ staging:
 # Overrides for demos
 demo:
   env:
-    # copy the default env configuration, so we can add to it
-    - name: SENTRY_DSN
-      value: https://ac1f05d48419453ab98e9af52d0da6ae@sentry.is.canonical.com//35
-
-    - name: RELEASES_GITHUB_TOKEN
-      secretKeyRef:
-        key: releases-github-token
-        name: github-api
-
-    - name: DISCOURSE_API_KEY
-      secretKeyRef:
-        key: discourse_api_key
-        name: canonical-discourse
-
-    - name: DISCOURSE_API_USERNAME
-      secretKeyRef:
-        key: discourse-api-username
-        name: canonical-discourse
-
-    - name: PRIVATE_KEY_ID
-      secretKeyRef:
-        key: private-key-id
-        name: specs-canonical-com
-
-    - name: PRIVATE_KEY
-      secretKeyRef:
-        key: private-key
-        name: specs-canonical-com
     # change SSO team for demos
     - name: OPENID_LAUNCHPAD_TEAM
       value: canonical-content-people
