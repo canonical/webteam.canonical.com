@@ -26,6 +26,9 @@ def get_all_teams():
         "Design system",
         "Commercial",
         "Landscape",
+        "Kernel factory",
+        "LXD Anbox",
+        "Systems",
     ]
 
 
