@@ -14,7 +14,7 @@
   "dependencies": {
     "autoprefixer": "10.4.13",
     "sass": "1.57.1",
-    "vanilla-framework": "3.9.0",
+    "vanilla-framework": "3.10.0",
     "postcss": "8.4.21",
     "postcss-cli": "8.3.1"
   }
