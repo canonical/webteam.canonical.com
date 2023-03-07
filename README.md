@@ -1,3 +1,3 @@
-# Deploy portal
+# webteam.canonical.com codebase
 
-A simple Flask app to display a single web page, to facilitate deploying [our websites](https://webteam.canonical.com/releases) to production.
+A Flask-based website of useful information and resources for and about Canonical's Web & Design teams.
