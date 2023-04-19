@@ -136,6 +136,11 @@ domain_repositories = [
         "staging_domain": "staging.vanillaframework.io",
         "repository": "canonical-web-and-design/vanilla-framework",
     },
+    {
+        "production_domain": "library.canonical.com",
+        "staging_domain": "library.staging.canonical.com",
+        "repository": "canonical-web-and-design/canonical",
+    },
 ]
 
 releases = Blueprint(
