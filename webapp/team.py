@@ -29,6 +29,7 @@ def get_all_teams():
         "Kernel factory",
         "LXD Anbox",
         "Systems",
+        "Desktop",
     ]
 
 
