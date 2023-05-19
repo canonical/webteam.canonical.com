@@ -141,6 +141,11 @@ domain_repositories = [
         "staging_domain": "library.staging.canonical.com",
         "repository": "canonical-web-and-design/canonical",
     },
+    {
+        "production_domain": "kernelfactory.canonical.com",
+        "staging_domain": "staging.kernelfactory.canonical.com",
+        "repository": "canonical-web-and-design/kernelfactory.canonical.com",
+    },
 ]
 
 releases = Blueprint(
