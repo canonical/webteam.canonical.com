@@ -96,7 +96,7 @@ def get_upcoming_sessions():
 
     sessions = []
     for row in res["sheets"][0]["data"][0]["rowData"]:
-        if "values" in row and row["values"][0]:
+        if _has_row_value(row):
             session = {}
             for column_index in range(len(COLUMNS)):
                 (column, type) = COLUMNS[column_index]
@@ -158,3 +158,13 @@ def get_previous_sessions():
     sessions.sort(key=lambda x: x["Date"]["Object"], reverse=True)
 
     return sessions
+
+
+def _has_row_value(row):
+    if (
+        "values" in row
+        and row["values"][0]
+        and "userEnteredValue" in row["values"][0]
+    ):
+        return True
+    return False
