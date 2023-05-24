@@ -144,7 +144,7 @@ domain_repositories = [
     {
         "production_domain": "kernelfactory.canonical.com",
         "staging_domain": "staging.kernelfactory.canonical.com",
-        "repository": "canonical-web-and-design/kernelfactory.canonical.com",
+        "repository": "canonical/kernelfactory.canonical.com",
     },
 ]
 
