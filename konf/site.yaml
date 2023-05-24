@@ -31,7 +31,7 @@ env:
       key: private-key
       name: specs-canonical-com
 
-memoryLimit: 128Mi
+memoryLimit: 256Mi
 
 # Overrides for production
 production:
