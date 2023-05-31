@@ -2,7 +2,7 @@ from datetime import datetime
 
 import flask
 
-from decorators import time_cache
+from webapp.decorators import time_cache
 from webapp.spreadsheet import get_sheet, MissingCredential
 
 
