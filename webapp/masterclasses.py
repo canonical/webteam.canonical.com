@@ -75,7 +75,7 @@ def index():
     )
 
 
-@time_cache(1800)
+@time_cache(3600)
 def get_upcoming_sessions():
     try:
         sheet = get_sheet()
@@ -118,7 +118,7 @@ def get_upcoming_sessions():
     return sessions
 
 
-@time_cache(1800)
+@time_cache(3600)
 def get_previous_sessions():
     try:
         sheet = get_sheet()
