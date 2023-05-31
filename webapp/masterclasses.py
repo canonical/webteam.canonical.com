@@ -1,5 +1,8 @@
 from datetime import datetime
+
 import flask
+
+from decorators import time_cache
 from webapp.spreadsheet import get_sheet, MissingCredential
 
 
@@ -72,6 +75,7 @@ def index():
     )
 
 
+@time_cache(1800)
 def get_upcoming_sessions():
     try:
         sheet = get_sheet()
@@ -114,6 +118,7 @@ def get_upcoming_sessions():
     return sessions
 
 
+@time_cache(1800)
 def get_previous_sessions():
     try:
         sheet = get_sheet()
