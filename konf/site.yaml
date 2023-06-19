@@ -1,6 +1,6 @@
 domain: webteam.canonical.com
 
-image: prod-comms.docker-registry.canonical.com/webteam.canonical.com
+image: prod-comms.ps5.docker-registry.canonical.com/webteam.canonical.com
 
 env:
   - name: SENTRY_DSN
