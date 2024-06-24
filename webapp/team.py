@@ -1,6 +1,7 @@
+import os
 import random as rnd
 from launchpadlib.launchpad import Launchpad
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, send_file
 
 webteam = Blueprint(
     "webteam", __name__, template_folder="/templates", static_folder="/static"
@@ -87,6 +88,10 @@ def mattermost():
             "team/mattermost.html", mattermost_handles=mattermost_handles
         )
 
+@webteam.route("/large-file")
+def serve_large_file():
+    file_path = os.path.join(os.path.dirname(__file__), "go1.22.4.linux-amd64.tar.gz")
+    return send_file(file_path)
 
 @webteam.after_request
 def add_headers(response):

@@ -53,4 +53,4 @@ demo:
     # change SSO team for demos
     - name: OPENID_LAUNCHPAD_TEAM
       value: canonical-content-people
-  nginx_proxy_body_size: 10m
+  nginx_proxy_body_size: 70m
