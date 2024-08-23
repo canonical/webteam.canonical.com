@@ -25,11 +25,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install Dotrun
-        uses: canonical/install-dotrun@main
+      - name: Install dotrun
+        run: sudo pip3 install dotrun
 
       - name: Install dependencies
-        run: dotrun install
+        run: |
+          sudo chmod -R 777 .
+          dotrun install
 
       - name: Build assets
         run: dotrun build
@@ -80,11 +82,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install Dotrun
-        uses: canonical/install-dotrun@main
+      - name: Install dotrun
+        run: sudo pip3 install dotrun
 
       - name: Install dependencies
-        run: dotrun install
+        run: |
+          sudo chmod -R 777 .
+          dotrun install
 
       - name: Build assets
         run: dotrun build
@@ -94,7 +98,7 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          dotrun exec coverage run --source=. -m unittest discover tests
+          dotrun exec coverage run --source=. --module unittest discover tests
           bash <(curl -s https://codecov.io/bash) -cF python
           
   check-inclusive-naming:

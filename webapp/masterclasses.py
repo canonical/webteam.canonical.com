@@ -1,7 +1,8 @@
 from datetime import datetime
-import flask
-from webapp.spreadsheet import get_sheet, MissingCredential
 
+import flask
+
+from webapp.spreadsheet import MissingCredential, get_sheet
 
 SPREADSHEET_ID = "1fFumFWIM3oHwLr9pcBlaANcadAU0bNJxbkfGKwC_1pg"
 
@@ -101,9 +102,11 @@ def get_upcoming_sessions():
             for column_index in range(len(COLUMNS)):
                 (column, type) = COLUMNS[column_index]
                 session[column] = get_value_row(
-                    row["values"][column_index]
-                    if index_in_list(row["values"], column_index)
-                    else None,
+                    (
+                        row["values"][column_index]
+                        if index_in_list(row["values"], column_index)
+                        else None
+                    ),
                     type,
                 )
                 if COLUMNS[column_index][0] == "Recording":
@@ -144,9 +147,11 @@ def get_previous_sessions():
             for column_index in range(len(COLUMNS)):
                 (column, type) = COLUMNS[column_index]
                 session[column] = get_value_row(
-                    row["values"][column_index]
-                    if index_in_list(row["values"], column_index)
-                    else None,
+                    (
+                        row["values"][column_index]
+                        if index_in_list(row["values"], column_index)
+                        else None
+                    ),
                     type,
                 )
                 if COLUMNS[column_index][0] == "Recording":
