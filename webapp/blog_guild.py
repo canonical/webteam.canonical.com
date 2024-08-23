@@ -1,7 +1,8 @@
 from datetime import datetime
-import flask
-from webapp.spreadsheet import get_sheet, MissingCredential
 
+import flask
+
+from webapp.spreadsheet import MissingCredential, get_sheet
 
 SPREADSHEET_ID = "1MhVXVE2cwR_rZ0TLyk5-wv2KKFRY72z3bPRf7r0qY_8"
 
@@ -34,7 +35,7 @@ def get_value_row(row, type):
                 ):
                     return row["userEnteredFormat"]["textFormat"]["link"][
                         "uri"
-                    ]
+                    ]  # noqa
                 return type(row["userEnteredValue"]["stringValue"])
             if "numberValue" in row["userEnteredValue"]:
                 return type(row["userEnteredValue"]["numberValue"])
@@ -98,9 +99,11 @@ def get_blogs():
             for column_index in range(len(COLUMNS)):
                 (column, type) = COLUMNS[column_index]
                 blog[column] = get_value_row(
-                    row["values"][column_index]
-                    if index_in_list(row["values"], column_index)
-                    else None,
+                    (
+                        row["values"][column_index]
+                        if index_in_list(row["values"], column_index)
+                        else None
+                    ),
                     type,
                 )
 
