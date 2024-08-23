@@ -82,11 +82,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install Dotrun
-        uses: canonical/install-dotrun@main
+      - name: Install dotrun
+        run: sudo pip3 install dotrun
 
       - name: Install dependencies
-        run: dotrun install
+        run: |
+          sudo chmod -R 777 .
+          dotrun install
 
       - name: Build assets
         run: dotrun build
