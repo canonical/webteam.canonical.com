@@ -1,5 +1,6 @@
 import random as rnd
 from typing import Any, List, TypedDict
+
 import requests
 from flask import Blueprint, jsonify, render_template, request
 from launchpadlib.launchpad import Launchpad
@@ -51,19 +52,6 @@ def exclude_team_members(
     all_set = set([member["username"] for member in team])
     map_username = {member["username"]: member for member in team}
     return [map_username[username] for username in all_set - exclude_set]
-
-
-@lru_cache(ttl_seconds=5)
-def random_wikipedia_topic() -> WikipediaTopic:
-    random_topic = "https://en.wikipedia.org/wiki/Special:Random"
-    response = requests.request("GET", random_topic)
-    topic_url = response.url
-    # <title>{title}</title>
-    topic_title = response.text.split("<title>")[1].split("</title>")[0]
-    return {
-        "title": topic_title,
-        "url": topic_url,
-    }
 
 
 def get_all_teams():
@@ -126,7 +114,6 @@ def random():
         "member": rnd.choice(all_members),
         "engineer_member": rnd.choice(engineers),
         "designer_member": rnd.choice(designers),
-        "topic": random_wikipedia_topic(),
         "teams": rnd.sample(team_names, len(team_names)),
     }
 
