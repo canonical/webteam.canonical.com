@@ -1,7 +1,6 @@
 import random as rnd
 from typing import Any, List, TypedDict
 
-import requests
 from flask import Blueprint, jsonify, render_template, request
 from launchpadlib.launchpad import Launchpad
 
