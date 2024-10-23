@@ -1,34 +1,48 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
-{% block description %}{% endblock %}
+{% block description %}
+
+{% endblock %}
 
 {% block content %}
-<section class="p-strip p-hero--home">
-  <div class="u-fixed-width">
-    <h1>{% block title %}Webteam randomizer{% endblock %}</h1>
-  </div>
-</section>
-
-<section>
-  <div class="row">
-    <div class="col-12">
-      <h2>Random webteam member</h2>
-      <p>{{ user }}</p>
-      <p><a href="https://en.wikipedia.org/wiki/Special:Random" class="p-button"><span>Random topic</span></a></p>
+  <section class="p-strip p-hero--home">
+    <div class="u-fixed-width">
+      <h1>
+        {% block title %}
+          Webteam randomizer
+        {% endblock %}
+      </h1>
     </div>
-  </div>
-</section>
+  </section>
 
-<section>
-  <div class="row">
-    <div class="col-12">
-      <h2>Random team order</h2>
-      <ol>
-        {% for team in teams %}
-          <li>{{ team }}</li>
-        {% endfor %}
+  <section>
+    <div class="row">
+      <div class="col-12">
+        <h2>Random webteam member</h2>
+        <p>{{ member.name }}</p>
+        <h2>Random designer</h2>
+        <p>{{ designer_member.name }}</p>
+        <h2>Random engineer</h2>
+        <p>{{ engineer_member.name }}</p>
+        <br />
+        <h2>Random topic</h2>
+        <p>
+          <a href="https://en.wikipedia.org/wiki/Special:Random">Wikipedia random article</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="row">
+      <div class="col-12">
+        <h2>Random team order</h2>
+        <ol>
+          {% for team in teams %}
+            <li>{{ team }}</li>
+          {% endfor %}
         </ol>
+      </div>
     </div>
-  </div>
-</section>
-{% endblock content %}
+  </section>
+{% endblock %}
