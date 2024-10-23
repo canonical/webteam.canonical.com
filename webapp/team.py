@@ -12,11 +12,6 @@ class TeamMember(TypedDict):
     username: str
 
 
-class WikipediaTopic(TypedDict):
-    title: str
-    url: str
-
-
 webteam = Blueprint(
     "webteam", __name__, template_folder="/templates", static_folder="/static"
 )
